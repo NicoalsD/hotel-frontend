@@ -64,3 +64,14 @@ Los servicios adicionales se pueden agregar mientras la reserva esté confirmada
 4. Al terminar, aparece la notificación **Servicio agregado** y el servicio queda en la tabla de servicios agregados.
 
 Si la reserva está finalizada, el catálogo se muestra deshabilitado y un aviso indica que los servicios solo pueden agregarse a reservas activas.
+
+## 6. Check-out
+
+El check-out cierra la estadía, genera la factura y revoca la llave digital.
+
+1. Abra la reserva que tiene check-in realizado.
+2. En **Acciones de estadía**, pulse **Check-out**.
+3. Lea el mensaje de confirmación y pulse **Realizar check-out**.
+4. El sistema lo lleva automáticamente a la factura de la reserva y muestra la notificación **Check-out realizado**.
+
+Antes de confirmar, verifique que el huésped haya terminado de consumir servicios, porque después del check-out ya no se pueden agregar. El botón **Check-out** permanece deshabilitado hasta que se haya realizado el check-in.
