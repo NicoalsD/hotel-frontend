@@ -17,7 +17,7 @@ import Stack from '@mui/material/Stack'
  */
 function ReservationSuccessDialog({ open, reservationId, onContinue }) {
   return (
-    <Dialog open={open} onClose={onContinue} aria-labelledby="reservation-success-title" maxWidth="xs" fullWidth>
+    <Dialog open={open} onClose={onContinue} aria-labelledby="reservation-success-title" aria-describedby="reservation-success-description" maxWidth="xs" fullWidth>
       <DialogTitle id="reservation-success-title">
         <Stack direction="row" spacing={1} alignItems="center">
           <CheckCircle color="success" aria-hidden="true" />
@@ -27,7 +27,7 @@ function ReservationSuccessDialog({ open, reservationId, onContinue }) {
       <DialogContent>
         <DialogContentText>Tu reserva fue creada con éxito. Guarda este código para consultarla:</DialogContentText>
         <Typography variant="h4" component="p" align="center" sx={{ my: 3, fontWeight: 700, letterSpacing: 2 }}>
-          {reservationId}
+          <span aria-label={`Código de reserva ${reservationId}`}>{reservationId}</span>
         </Typography>
       </DialogContent>
       <DialogActions>
