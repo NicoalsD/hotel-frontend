@@ -5,6 +5,27 @@ import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import SearchIcon from '@mui/icons-material/Search'
 import RoomTypeFilter from './RoomTypeFilter.jsx'
+import DateFormatter from '../../utils/DateFormatter.js'
+
+/**
+ * Valida las fechas de búsqueda y devuelve los mensajes de error en español.
+ * @param {{checkIn: string, checkOut: string}} values Fechas a validar.
+ * @returns {{checkIn?: string, checkOut?: string}} Vacío cuando las fechas son válidas.
+ */
+function validateDates({ checkIn, checkOut }) {
+  const errors = {}
+  if (!checkIn) {
+    errors.checkIn = 'Indica la fecha de entrada.'
+  } else if (checkIn < DateFormatter.today()) {
+    errors.checkIn = 'La fecha de entrada no puede ser anterior a hoy.'
+  }
+  if (!checkOut) {
+    errors.checkOut = 'Indica la fecha de salida.'
+  } else if (checkIn && DateFormatter.nightsBetween(checkIn, checkOut) <= 0) {
+    errors.checkOut = 'La fecha de salida debe ser posterior a la de entrada.'
+  }
+  return errors
+}
 
 /**
  * Formulario de búsqueda: fecha de entrada, fecha de salida y tipo de habitación.
@@ -14,14 +35,20 @@ import RoomTypeFilter from './RoomTypeFilter.jsx'
  */
 function SearchForm({ initialValues, onSubmit }) {
   const [values, setValues] = useState(initialValues)
+  const [errors, setErrors] = useState({})
 
   const handleChange = (field) => (event) => {
     setValues((previous) => ({ ...previous, [field]: event.target.value }))
+    setErrors((previous) => ({ ...previous, [field]: undefined }))
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    onSubmit(values)
+    const nextErrors = validateDates(values)
+    setErrors(nextErrors)
+    if (Object.keys(nextErrors).length === 0) {
+      onSubmit(values)
+    }
   }
 
   return (
