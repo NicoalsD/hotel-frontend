@@ -1,8 +1,7 @@
-import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider'
 import Paper from '@mui/material/Paper'
 import Stack from '@mui/material/Stack'
-import Typography from '@mui/material/Typography'
+import InvoiceFooter from './InvoiceFooter.jsx'
 import InvoiceHeader from './InvoiceHeader.jsx'
 import InvoiceLinesTable from './InvoiceLinesTable.jsx'
 import InvoiceTotals from './InvoiceTotals.jsx'
@@ -30,14 +29,7 @@ function InvoiceView({ invoice }) {
         <InvoiceLinesTable lines={invoice.lines} />
         <InvoiceTotals invoice={invoice} />
         <Divider />
-        <Box sx={{ '@media print': { breakInside: 'avoid' } }}>
-          <Typography variant="caption" color="text.secondary" textTransform="uppercase">
-            Código de llave digital
-          </Typography>
-          <Typography sx={{ fontFamily: 'monospace', wordBreak: 'break-all' }}>
-            {invoice.digitalKeyCode ?? 'No disponible'}
-          </Typography>
-        </Box>
+        <InvoiceFooter digitalKeyCode={invoice.digitalKeyCode} />
       </Stack>
     </Paper>
   )
