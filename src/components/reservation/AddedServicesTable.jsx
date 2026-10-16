@@ -1,4 +1,3 @@
-import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -20,12 +19,12 @@ function AddedServicesTable({ services }) {
   }
 
   return (
-    <TableContainer component={Paper} variant="outlined">
+    <TableContainer>
       <Table size="small" aria-label="Servicios agregados">
         <TableHead>
           <TableRow>
             <TableCell>Servicio</TableCell>
-            <TableCell>Fecha</TableCell>
+            <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>Fecha</TableCell>
             <TableCell align="right">Precio unitario</TableCell>
             <TableCell align="right">Cantidad</TableCell>
             <TableCell align="right">Total</TableCell>
@@ -35,7 +34,7 @@ function AddedServicesTable({ services }) {
           {services.map((service) => (
             <TableRow key={service.id}>
               <TableCell>{service.label}</TableCell>
-              <TableCell>{DateFormatter.format(service.addedAt)}</TableCell>
+              <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>{DateFormatter.format(service.addedAt)}</TableCell>
               <TableCell align="right">
                 <MoneyText value={service.unitPrice} />
               </TableCell>
