@@ -1,14 +1,16 @@
 import { useState } from 'react'
-import { Link as RouterLink, useParams } from 'react-router-dom'
+import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import PageContainer from '../components/layout/PageContainer.jsx'
+import DigitalKeyCard from '../components/reservation/DigitalKeyCard.jsx'
 import GuestInfoCard from '../components/reservation/GuestInfoCard.jsx'
 import ReservationSummary from '../components/reservation/ReservationSummary.jsx'
 import ServicesPanel from '../components/reservation/ServicesPanel.jsx'
+import StayActions from '../components/reservation/StayActions.jsx'
 import ErrorAlert from '../components/common/ErrorAlert.jsx'
 import LoadingState from '../components/common/LoadingState.jsx'
 import hotelApiService from '../api/hotelApiInstance.js'
@@ -20,6 +22,7 @@ import useAsync from '../hooks/useAsync.js'
  */
 function ReservationDetailPage() {
   const { reservationId } = useParams()
+  const navigate = useNavigate()
   const fetched = useAsync(() => hotelApiService.getReservation(reservationId), [reservationId])
   const [updated, setUpdated] = useState(null)
 
@@ -37,11 +40,21 @@ function ReservationDetailPage() {
         )}
         {reservation && (
           <Grid container spacing={3}>
-            <Grid size={{ xs: 12 }}>
+            <Grid size={{ xs: 12, md: 7 }}>
               <Stack spacing={3}>
                 <ReservationSummary reservation={reservation} />
                 <GuestInfoCard guest={reservation.guest} />
                 <ServicesPanel reservation={reservation} onUpdated={setUpdated} />
+              </Stack>
+            </Grid>
+            <Grid size={{ xs: 12, md: 5 }}>
+              <Stack spacing={3}>
+                <StayActions
+                  reservation={reservation}
+                  onCheckedIn={setUpdated}
+                  onCheckedOut={() => navigate(`/reservas/${reservation.id}/factura`)}
+                />
+                <DigitalKeyCard digitalKey={reservation.digitalKey} />
               </Stack>
             </Grid>
           </Grid>
