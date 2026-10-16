@@ -28,7 +28,7 @@ function ReservationTotalsCard({ reservation }) {
     <Card component="section" aria-labelledby="totales-reserva">
       <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
         <Stack spacing={2}>
-          <Typography id="totales-reserva" variant="h5" component="h2">
+          <Typography id="totales-reserva" variant="h4" component="h2">
             Total de la reserva
           </Typography>
           <Stack spacing={1.25}>
