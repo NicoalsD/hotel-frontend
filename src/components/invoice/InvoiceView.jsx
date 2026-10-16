@@ -18,8 +18,9 @@ function InvoiceView({ invoice }) {
       component="article"
       aria-label={`Factura ${invoice.invoiceNumber}`}
       sx={{
+        width: '100%',
         maxWidth: 860,
-        mx: 'auto',
+        alignSelf: 'center',
         p: { xs: 3, md: 5 },
         '@media print': { border: 'none', boxShadow: 'none', p: 0 },
       }}
