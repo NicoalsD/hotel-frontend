@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
+import SearchIcon from '@mui/icons-material/Search'
 import TextField from '@mui/material/TextField'
 import hotelApiService from '../../api/hotelApiInstance.js'
 import { tokens } from '../../theme/theme.js'
@@ -64,7 +65,7 @@ function ReservationLookup() {
           setErrorMessage(null)
         }}
         error={errorMessage !== null}
-        helperText={errorMessage ?? ' '}
+        helperText={errorMessage ?? undefined}
         fullWidth
         autoComplete="off"
         slotProps={{ input: { disableUnderline: true } }}
@@ -76,8 +77,7 @@ function ReservationLookup() {
             minHeight: 56,
             '&:hover, &.Mui-focused': { bgcolor: tokens.white },
           },
-          '& .MuiFormHelperText-root': { color: tokens.ink, fontWeight: 600, mx: 0.5, mt: 0.5, minHeight: 0 },
-          '& .MuiFormHelperText-root.Mui-error': { color: tokens.danger },
+          '& .MuiFormHelperText-root': { color: tokens.ink, fontWeight: 600, mx: 0.5 },
           '& .MuiInputLabel-root.Mui-error': { color: tokens.danger },
         }}
       />
@@ -86,7 +86,8 @@ function ReservationLookup() {
         variant="contained"
         size="large"
         disabled={searching}
-        sx={{ minHeight: 56, minWidth: { sm: 180 }, flexShrink: 0, bgcolor: tokens.navy, '&:hover': { bgcolor: tokens.navyDark } }}
+        startIcon={<SearchIcon />}
+        sx={{ minHeight: 56, px: 4, flexShrink: 0 }}
       >
         {searching ? 'Buscando...' : 'Buscar reserva'}
       </Button>
