@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import Alert from '@mui/material/Alert'
+import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
+import Divider from '@mui/material/Divider'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import AddedServicesTable from './AddedServicesTable.jsx'
@@ -37,11 +39,14 @@ function ServicesPanel({ reservation, onUpdated }) {
 
   return (
     <Card variant="outlined" component="section" aria-labelledby="servicios-reserva">
-      <CardContent>
-        <Stack spacing={2}>
-          <Typography id="servicios-reserva" variant="h6" component="h2">
-            Servicios adicionales
-          </Typography>
+      <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
+        <Stack spacing={2.5}>
+          <Box>
+            <Typography id="servicios-reserva" variant="h4" component="h2">
+              Servicios adicionales
+            </Typography>
+            <Typography color="text.secondary">Agrega servicios a la estadía; se suman al total de la reserva.</Typography>
+          </Box>
           {actionError && <ErrorAlert message={actionError} />}
           {catalog.loading && !catalog.data && <LoadingState message="Cargando catálogo..." />}
           {catalog.error && <ErrorAlert message="No se pudo cargar el catálogo de servicios." onRetry={() => catalog.execute()} />}
@@ -56,7 +61,13 @@ function ServicesPanel({ reservation, onUpdated }) {
           {!reservation.canAddServices && (
             <Alert severity="info">Los servicios solo pueden agregarse a reservas activas.</Alert>
           )}
-          <AddedServicesTable services={reservation.services} />
+          <Divider />
+          <Stack spacing={1.5}>
+            <Typography variant="h6" component="h3">
+              Servicios agregados
+            </Typography>
+            <AddedServicesTable services={reservation.services} />
+          </Stack>
         </Stack>
       </CardContent>
     </Card>

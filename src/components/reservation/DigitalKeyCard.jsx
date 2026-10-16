@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Alert from '@mui/material/Alert'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Chip from '@mui/material/Chip'
@@ -7,8 +6,10 @@ import IconButton from '@mui/material/IconButton'
 import Stack from '@mui/material/Stack'
 import Tooltip from '@mui/material/Tooltip'
 import Typography from '@mui/material/Typography'
+import { alpha } from '@mui/material/styles'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import DateFormatter from '../../utils/DateFormatter.js'
+import { tokens } from '../../theme/theme.js'
 
 /**
  * Tarjeta de la llave digital de la habitación.
@@ -30,43 +31,60 @@ function DigitalKeyCard({ digitalKey }) {
   }
 
   return (
-    <Card variant="outlined" component="section" aria-labelledby="llave-digital">
-      <CardContent>
-        <Stack spacing={1.5}>
+    <Card component="section" aria-labelledby="llave-digital" sx={{ bgcolor: tokens.navy, color: tokens.white, borderColor: tokens.navy }}>
+      <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
+        <Stack spacing={2}>
           <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={1}>
-            <Typography id="llave-digital" variant="h6" component="h2">
+            <Typography id="llave-digital" variant="h4" component="h2" sx={{ color: tokens.white }}>
               Llave digital
             </Typography>
             {digitalKey && (
               <Chip
                 size="small"
                 label={digitalKey.isRevoked ? 'Revocada' : 'Activa'}
-                color={digitalKey.isRevoked ? 'default' : 'success'}
+                sx={{
+                  fontWeight: 700,
+                  bgcolor: digitalKey.isRevoked ? tokens.ground : tokens.successSoft,
+                  color: digitalKey.isRevoked ? tokens.inkMuted : tokens.success,
+                }}
               />
             )}
           </Stack>
           {digitalKey ? (
             <>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" sx={{ color: alpha(tokens.white, 0.82) }}>
                 Habitación {digitalKey.roomNumber}
                 {digitalKey.issuedAt && ` · Emitida el ${DateFormatter.format(digitalKey.issuedAt)}`}
               </Typography>
-              <Stack direction="row" alignItems="center" spacing={1}>
+              <Stack
+                direction="row"
+                alignItems="center"
+                spacing={1}
+                sx={{ bgcolor: tokens.ground, color: tokens.ink, borderRadius: '8px', p: 1.5 }}
+              >
                 <Typography
                   component="p"
-                  sx={{ fontFamily: 'monospace', wordBreak: 'break-all', flex: 1, textDecoration: digitalKey.isRevoked ? 'line-through' : 'none' }}
+                  sx={{
+                    fontFamily: 'monospace',
+                    fontWeight: 700,
+                    wordBreak: 'break-all',
+                    flex: 1,
+                    textDecoration: digitalKey.isRevoked ? 'line-through' : 'none',
+                  }}
                 >
                   {digitalKey.code}
                 </Typography>
                 <Tooltip title={copied ? 'Código copiado' : 'Copiar código'}>
-                  <IconButton aria-label="Copiar código de llave" onClick={handleCopy} size="small">
+                  <IconButton aria-label="Copiar código de llave" onClick={handleCopy} size="small" sx={{ color: tokens.navy }}>
                     <ContentCopyIcon fontSize="small" />
                   </IconButton>
                 </Tooltip>
               </Stack>
             </>
           ) : (
-            <Alert severity="info">La llave digital se emite al realizar el check-in.</Alert>
+            <Typography variant="body2" sx={{ color: alpha(tokens.white, 0.82) }}>
+              La llave digital se emite al realizar el check-in.
+            </Typography>
           )}
         </Stack>
       </CardContent>

@@ -4,22 +4,22 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
-import Paper from '@mui/material/Paper'
 import MoneyText from '../common/MoneyText.jsx'
 
 /**
  * Tabla de líneas de la factura: estadía por temporada y servicios adicionales.
+ * Los importes van alineados a la derecha con cifras tabulares.
  * @param {Object} props
  * @param {import('../../models/InvoiceLine.js').default[]} props.lines Líneas de la factura.
  */
 function InvoiceLinesTable({ lines }) {
   return (
-    <TableContainer component={Paper} variant="outlined">
-      <Table size="small" aria-label="Detalle de la factura">
+    <TableContainer>
+      <Table size="small" aria-label="Detalle de la factura" sx={{ minWidth: 480 }}>
         <TableHead>
           <TableRow>
             <TableCell>Descripción</TableCell>
-            <TableCell align="right">Cantidad</TableCell>
+            <TableCell align="right">Cant.</TableCell>
             <TableCell align="right">Precio unitario</TableCell>
             <TableCell align="right">Importe</TableCell>
           </TableRow>
@@ -32,7 +32,7 @@ function InvoiceLinesTable({ lines }) {
               <TableCell align="right">
                 <MoneyText value={line.unitPrice} />
               </TableCell>
-              <TableCell align="right">
+              <TableCell align="right" sx={{ fontWeight: 700 }}>
                 <MoneyText value={line.amount} />
               </TableCell>
             </TableRow>

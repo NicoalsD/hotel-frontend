@@ -19,12 +19,14 @@ import DialogTitle from '@mui/material/DialogTitle'
 function ConfirmActionDialog({ open, title, message, confirmLabel, onConfirm, onClose, loading = false }) {
   return (
     <Dialog open={open} onClose={loading ? undefined : onClose} aria-labelledby="confirmar-accion-titulo">
-      <DialogTitle id="confirmar-accion-titulo">{title}</DialogTitle>
+      <DialogTitle id="confirmar-accion-titulo" sx={{ fontWeight: 800, pb: 1 }}>
+        {title}
+      </DialogTitle>
       <DialogContent>
         <DialogContentText>{message}</DialogContentText>
       </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose} disabled={loading}>
+      <DialogActions sx={{ px: 3, pb: 2.5 }}>
+        <Button onClick={onClose} disabled={loading} color="inherit" sx={{ color: 'text.secondary' }}>
           Cancelar
         </Button>
         <Button variant="contained" onClick={onConfirm} disabled={loading}>

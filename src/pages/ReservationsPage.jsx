@@ -7,14 +7,17 @@ import hotelApiService from '../api/hotelApiInstance.js'
 import useAsync from '../hooks/useAsync.js'
 
 /**
- * Página de reservas: buscador por código y listado de todas las reservas.
+ * Página de reservas: buscador por código en la banda de título y listado de todas las reservas.
  */
 function ReservationsPage() {
   const reservations = useAsync(() => hotelApiService.listReservations(), [])
 
   return (
-    <PageContainer title="Reservas" subtitle="Busque una reserva por su código o revise el listado completo.">
-      <ReservationLookup />
+    <PageContainer
+      title="Mis reservas"
+      subtitle="Busque una reserva por su código o revise el listado completo."
+      band={<ReservationLookup />}
+    >
       {reservations.loading && !reservations.data && <LoadingState message="Cargando reservas..." />}
       {reservations.error && (
         <ErrorAlert message="No se pudieron cargar las reservas." onRetry={() => reservations.execute()} />
