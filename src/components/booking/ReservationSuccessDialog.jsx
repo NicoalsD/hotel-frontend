@@ -1,12 +1,14 @@
+import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
+import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import CheckCircle from '@mui/icons-material/CheckCircle'
-import Stack from '@mui/material/Stack'
+import { tokens } from '../../theme/theme.js'
 
 /**
  * Diálogo que confirma la reserva creada y muestra su código.
@@ -17,22 +19,47 @@ import Stack from '@mui/material/Stack'
  */
 function ReservationSuccessDialog({ open, reservationId, onContinue }) {
   return (
-    <Dialog open={open} onClose={onContinue} aria-labelledby="reservation-success-title" aria-describedby="reservation-success-description" maxWidth="xs" fullWidth>
-      <DialogTitle id="reservation-success-title">
-        <Stack direction="row" spacing={1} alignItems="center">
-          <CheckCircle color="success" aria-hidden="true" />
+    <Dialog
+      open={open}
+      onClose={onContinue}
+      aria-labelledby="reservation-success-title"
+      aria-describedby="reservation-success-description"
+      maxWidth="xs"
+      fullWidth
+    >
+      <DialogTitle id="reservation-success-title" sx={{ pb: 1 }}>
+        <Stack direction="row" spacing={1.25} alignItems="center">
+          <CheckCircle sx={{ color: tokens.success }} aria-hidden="true" />
           <span>Reserva confirmada</span>
         </Stack>
       </DialogTitle>
       <DialogContent>
-        <DialogContentText id="reservation-success-description">Tu reserva fue creada con éxito. Guarda este código para consultarla:</DialogContentText>
-        <Typography variant="h4" component="p" align="center" sx={{ my: 3, fontWeight: 700, letterSpacing: 2 }}>
-          <span aria-label={`Código de reserva ${reservationId}`}>{reservationId}</span>
-        </Typography>
+        <DialogContentText id="reservation-success-description">
+          Tu reserva fue creada con éxito. Guarda este código para consultarla:
+        </DialogContentText>
+        <Box
+          sx={{
+            mt: 2.5,
+            py: 2.5,
+            px: 2,
+            borderRadius: '10px',
+            bgcolor: tokens.ground,
+            border: `1px solid ${tokens.line}`,
+            textAlign: 'center',
+          }}
+        >
+          <Typography
+            variant="h3"
+            component="p"
+            sx={{ fontWeight: 800, letterSpacing: '0.08em', fontVariantNumeric: 'tabular-nums' }}
+          >
+            <span aria-label={`Código de reserva ${reservationId}`}>{reservationId}</span>
+          </Typography>
+        </Box>
       </DialogContent>
-      <DialogActions>
+      <DialogActions sx={{ px: 3, pb: 3 }}>
         <Button variant="contained" onClick={onContinue} fullWidth>
-          Ver reserva
+          Gestionar reserva
         </Button>
       </DialogActions>
     </Dialog>
