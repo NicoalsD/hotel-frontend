@@ -42,3 +42,14 @@ Al confirmar, se muestra un mensaje de éxito con el código de la reserva (form
 5. Pulse **Gestionar** en la fila de la reserva para abrir su panel de gestión.
 
 El panel muestra el resumen de la reserva, los datos del huésped, los servicios adicionales, las acciones de estadía y la llave digital.
+
+## 4. Check-in
+
+El check-in registra la llegada del huésped y emite la llave digital de la habitación.
+
+1. Abra la reserva desde **Reservas** con el botón **Gestionar**.
+2. En la sección **Acciones de estadía**, pulse **Check-in**.
+3. Revise el mensaje de confirmación y pulse **Realizar check-in**.
+4. Cuando el proceso termina, aparece la notificación **Check-in realizado** y la tarjeta **Llave digital** muestra el código de la llave.
+
+El botón **Check-in** solo está habilitado para reservas confirmadas. Si pasa el cursor sobre el botón deshabilitado, aparece un mensaje que explica el motivo (por ejemplo, que el check-in ya fue realizado o que la estadía finalizó).
