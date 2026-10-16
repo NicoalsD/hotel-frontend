@@ -75,3 +75,15 @@ El check-out cierra la estadía, genera la factura y revoca la llave digital.
 4. El sistema lo lleva automáticamente a la factura de la reserva y muestra la notificación **Check-out realizado**.
 
 Antes de confirmar, verifique que el huésped haya terminado de consumir servicios, porque después del check-out ya no se pueden agregar. El botón **Check-out** permanece deshabilitado hasta que se haya realizado el check-in.
+
+## 7. Factura
+
+La factura la genera el servidor al realizar el check-out.
+
+1. Desde el panel de la reserva finalizada, o tras el check-out, se muestra la factura con su número (FAC).
+2. La factura incluye los datos de la estadía, el detalle de las líneas (habitación y servicios), los subtotales, el **IVA (19%)** y el **Total** a pagar.
+3. Al final aparece el código de la llave digital asociada a la estadía.
+4. Para imprimir o guardar la factura, pulse **Imprimir**. Los botones de navegación no se incluyen en la impresión.
+5. Use **Volver a la reserva** para regresar al panel de gestión.
+
+Los montos se muestran en dólares estadounidenses (USD).
