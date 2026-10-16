@@ -5,11 +5,13 @@ import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import PageContainer from '../components/layout/PageContainer.jsx'
 import DigitalKeyCard from '../components/reservation/DigitalKeyCard.jsx'
 import GuestInfoCard from '../components/reservation/GuestInfoCard.jsx'
-import ReservationSummary from '../components/reservation/ReservationSummary.jsx'
+import ReservationTotalsCard from '../components/reservation/ReservationTotalsCard.jsx'
+import StayOverviewCard from '../components/reservation/StayOverviewCard.jsx'
 import ServicesPanel from '../components/reservation/ServicesPanel.jsx'
 import StayActions from '../components/reservation/StayActions.jsx'
 import ActionSnackbar from '../components/common/ActionSnackbar.jsx'
@@ -75,7 +77,7 @@ function ReservationDetailPage() {
           <Grid container spacing={3}>
             <Grid size={{ xs: 12, md: 7 }}>
               <Stack spacing={3}>
-                <ReservationSummary reservation={reservation} />
+                <StayOverviewCard reservation={reservation} />
                 <GuestInfoCard guest={reservation.guest} />
                 <ServicesPanel reservation={reservation} onUpdated={handleServiceAdded} />
               </Stack>
@@ -92,6 +94,19 @@ function ReservationDetailPage() {
                   }
                 />
                 <DigitalKeyCard digitalKey={reservation.digitalKey} />
+                <ReservationTotalsCard reservation={reservation} />
+                {reservation.invoiceNumber && (
+                  <Button
+                    component={RouterLink}
+                    to={`/reservas/${reservation.id}/factura`}
+                    variant="outlined"
+                    size="large"
+                    startIcon={<ReceiptLongIcon />}
+                    fullWidth
+                  >
+                    Ver factura
+                  </Button>
+                )}
               </Stack>
             </Grid>
           </Grid>
