@@ -1,5 +1,4 @@
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import Paper from '@mui/material/Paper'
 import Stack from '@mui/material/Stack'
 import SearchOffIcon from '@mui/icons-material/SearchOff'
 import EventAvailableIcon from '@mui/icons-material/EventAvailable'
@@ -85,18 +84,24 @@ function SearchPage() {
     )
   }
 
+  const nights = DateFormatter.nightsBetween(checkIn, checkOut)
+  const subtitle = hasValidRange
+    ? `${DateFormatter.format(checkIn)} - ${DateFormatter.format(checkOut)} · ${nights} ${nights === 1 ? 'noche' : 'noches'}`
+    : undefined
+
   return (
-    <PageContainer title="Buscar habitaciones" subtitle="Consulta la disponibilidad por fechas y tipo de habitación.">
-      <Stack spacing={4}>
-        <Paper variant="outlined" sx={{ p: { xs: 2, md: 3 } }}>
-          <SearchForm
-            key={searchParams.toString()}
-            initialValues={{ checkIn, checkOut, roomType }}
-            onSubmit={handleSearch}
-          />
-        </Paper>
-        {content}
-      </Stack>
+    <PageContainer
+      title="Habitaciones disponibles"
+      subtitle={subtitle}
+      band={
+        <SearchForm
+          key={searchParams.toString()}
+          initialValues={{ checkIn, checkOut, roomType }}
+          onSubmit={handleSearch}
+        />
+      }
+    >
+      <Stack spacing={4}>{content}</Stack>
     </PageContainer>
   )
 }
