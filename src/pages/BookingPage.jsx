@@ -19,12 +19,14 @@ import PricePreview from '../components/booking/PricePreview.jsx'
 import GuestForm from '../components/booking/GuestForm.jsx'
 import Guest from '../models/Guest.js'
 import GuestValidator from '../utils/GuestValidator.js'
+import ReservationSuccessDialog from '../components/booking/ReservationSuccessDialog.jsx'
 
 /**
  * Página de reserva para una habitación: resumen, fechas, precio, datos del huésped y confirmación.
  */
 function BookingPage() {
   const { roomId } = useParams()
+  const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
   const [guest, setGuest] = useState({ fullName: '', documentNumber: '', email: '', phone: '' })
   const [guestErrors, setGuestErrors] = useState({})
@@ -129,7 +131,7 @@ function BookingPage() {
   return (
     <PageContainer title="Reservar habitación" subtitle="Completa los datos para confirmar tu estadía.">
       <Stack spacing={3}>
-        <BookingStepper activeStep={1} />
+        <BookingStepper activeStep={createdReservation ? 2 : 1} />
         <SelectedRoomCard room={room} />
         <Paper variant="outlined" sx={{ p: 3 }}>
           <Typography variant="h6" component="h2" gutterBottom>
@@ -183,6 +185,11 @@ function BookingPage() {
           />
         </Paper>
       </Stack>
+      <ReservationSuccessDialog
+        open={Boolean(createdReservation)}
+        reservationId={createdReservation?.id ?? ''}
+        onContinue={() => navigate(`/reservas/${createdReservation.id}`)}
+      />
     </PageContainer>
   )
 }
