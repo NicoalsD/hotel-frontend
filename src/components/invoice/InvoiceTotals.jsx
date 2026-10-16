@@ -32,7 +32,7 @@ function InvoiceTotals({ invoice }) {
       <TotalRow label="Subtotal">
         <MoneyText value={invoice.subtotal} component="span" />
       </TotalRow>
-      <TotalRow label={`IVA ${invoice.taxPercentage}%`}>
+      <TotalRow label={`IVA (${invoice.taxPercentage}%)`}>
         <MoneyText value={invoice.taxAmount} component="span" />
       </TotalRow>
       <Divider />

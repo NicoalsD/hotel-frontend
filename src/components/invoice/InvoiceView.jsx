@@ -18,8 +18,13 @@ import InvoiceTotals from './InvoiceTotals.jsx'
  */
 function InvoiceView({ invoice }) {
   return (
-    <Card variant="outlined" component="article" aria-label={`Factura ${invoice.invoiceNumber}`}>
-      <CardContent>
+    <Card
+      variant="outlined"
+      component="article"
+      aria-label={`Factura ${invoice.invoiceNumber}`}
+      sx={{ '@media print': { border: 'none', boxShadow: 'none' } }}
+    >
+      <CardContent sx={{ '@media print': { p: 0, '&:last-child': { pb: 0 } } }}>
         <Stack spacing={3}>
           <Box className="no-print" sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button variant="outlined" startIcon={<PrintIcon />} onClick={() => window.print()}>
@@ -30,7 +35,7 @@ function InvoiceView({ invoice }) {
           <InvoiceLinesTable lines={invoice.lines} />
           <InvoiceTotals invoice={invoice} />
           <Divider />
-          <Box>
+          <Box sx={{ '@media print': { breakInside: 'avoid' } }}>
             <Typography variant="caption" color="text.secondary" textTransform="uppercase">
               Código de llave digital
             </Typography>
