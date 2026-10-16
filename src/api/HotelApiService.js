@@ -1,7 +1,9 @@
 import PriceQuote from '../models/PriceQuote.js'
+import Invoice from '../models/Invoice.js'
 import Reservation from '../models/Reservation.js'
 import Room from '../models/Room.js'
 import RoomAvailability from '../models/RoomAvailability.js'
+import ServiceCatalogItem from '../models/ServiceCatalogItem.js'
 import HttpClient from './HttpClient.js'
 
 const BASE_PATH = '/api/hotel'
@@ -88,6 +90,60 @@ class HotelApiService {
   async listReservations() {
     const json = await this.httpClient.get(`${BASE_PATH}/reservas`)
     return json.map((item) => Reservation.fromJson(item))
+  }
+}
+
+  /**
+   * Agrega un servicio adicional a una reserva activa.
+   * @param {string} reservationId Código de reserva.
+   * @param {string} serviceType Tipo de servicio: SPA, BREAKFAST o TRANSFER.
+   * @returns {Promise<Reservation>} Reserva actualizada.
+   */
+  async addService(reservationId, serviceType) {
+    const json = await this.httpClient.post(
+      `${BASE_PATH}/servicios/${encodeURIComponent(reservationId)}`,
+      { serviceType },
+    )
+    return Reservation.fromJson(json)
+  }
+
+  /**
+   * Obtiene el catálogo de servicios adicionales.
+   * @returns {Promise<ServiceCatalogItem[]>}
+   */
+  async getServiceCatalog() {
+    const json = await this.httpClient.get(`${BASE_PATH}/servicios/catalogo`)
+    return json.map((item) => ServiceCatalogItem.fromJson(item))
+  }
+
+  /**
+   * Realiza el check-in de una reserva confirmada y emite la llave digital.
+   * @param {string} reservationId Código de reserva.
+   * @returns {Promise<Reservation>}
+   */
+  async checkIn(reservationId) {
+    const json = await this.httpClient.put(`${BASE_PATH}/checkin/${encodeURIComponent(reservationId)}`)
+    return Reservation.fromJson(json)
+  }
+
+  /**
+   * Realiza el check-out de una reserva y devuelve la factura generada.
+   * @param {string} reservationId Código de reserva.
+   * @returns {Promise<Invoice>}
+   */
+  async checkOut(reservationId) {
+    const json = await this.httpClient.put(`${BASE_PATH}/checkout/${encodeURIComponent(reservationId)}`)
+    return Invoice.fromJson(json)
+  }
+
+  /**
+   * Obtiene la factura de una reserva ya finalizada.
+   * @param {string} reservationId Código de reserva.
+   * @returns {Promise<Invoice>}
+   */
+  async getInvoice(reservationId) {
+    const json = await this.httpClient.get(`${BASE_PATH}/factura/${encodeURIComponent(reservationId)}`)
+    return Invoice.fromJson(json)
   }
 }
 
