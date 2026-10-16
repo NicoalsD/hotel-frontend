@@ -188,7 +188,7 @@ function BookingPage() {
       <ReservationSuccessDialog
         open={Boolean(createdReservation)}
         reservationId={createdReservation?.id ?? ''}
-        onContinue={() => navigate(`/reservas/${createdReservation.id}`)}
+        onContinue={() => createdReservation && navigate(`/reservas/${createdReservation.id}`)}
       />
     </PageContainer>
   )
