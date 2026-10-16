@@ -10,8 +10,6 @@ La barra superior muestra tres secciones:
 - **Buscar**: consulta de disponibilidad de habitaciones por fechas y tipo.
 - **Reservas**: buscador por código y listado de todas las reservas.
 
-En pantallas pequeñas, las secciones se muestran debajo de la marca del hotel.
-
 ## 1. Buscar habitaciones
 
 1. Ingrese a la sección **Buscar** desde la barra superior.
