@@ -17,3 +17,20 @@ La aplicación queda disponible en `http://localhost:5173` y redirige las petici
 - Material UI v9 (`@mui/material`, `@mui/icons-material`)
 - React Router v7 (`react-router-dom`)
 - dayjs para fechas
+
+## Estructura del proyecto
+
+```
+src/
+  api/         Cliente HTTP y servicio de la API del hotel
+  config/      Configuración desde variables de entorno
+  components/  Componentes por flujo: search, booking, reservation, invoice, common, layout
+  hooks/       Hooks reutilizables
+  models/      Clases de dominio (una por archivo)
+  pages/       Páginas asociadas a rutas
+  theme/       Tema de Material UI
+  utils/       Formato, validaciones y catálogos
+docs/          Documentación de arquitectura, componentes, API y despliegue
+```
+
+Más detalle en [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md) y [docs/COMPONENTES.md](docs/COMPONENTES.md).
