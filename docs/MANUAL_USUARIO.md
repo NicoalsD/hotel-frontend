@@ -87,3 +87,12 @@ La factura la genera el servidor al realizar el check-out.
 5. Use **Volver a la reserva** para regresar al panel de gestión.
 
 Los montos se muestran en dólares estadounidenses (USD).
+
+## Resumen del flujo
+
+1. **Buscar** la disponibilidad por fechas y tipo de habitación.
+2. **Reservar** la habitación y registrar los datos del huésped.
+3. **Gestionar** la reserva desde el listado de reservas.
+4. Realizar el **check-in** al llegar el huésped.
+5. **Agregar servicios** durante la estadía.
+6. Realizar el **check-out** al salir y consultar la **factura**.
