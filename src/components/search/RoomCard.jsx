@@ -30,6 +30,7 @@ function RoomCard({ room, onSelect }) {
             size="small"
             label={room.availabilityLabel}
             color={room.available ? 'success' : 'default'}
+            variant={room.available ? 'filled' : 'outlined'}
           />
         </Stack>
         <Stack direction="row" alignItems="center" spacing={1} sx={{ mt: 1, color: 'text.secondary' }}>
