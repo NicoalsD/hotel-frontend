@@ -6,10 +6,10 @@ import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
 const FIELDS = [
-  { name: 'fullName', label: 'Nombre completo', autoComplete: 'name', span: 12, hint: 'Escribe el nombre tal como aparece en tu documento' },
+  { name: 'fullName', label: 'Nombre completo', autoComplete: 'name', span: 6, hint: 'Escribe el nombre tal como aparece en tu documento' },
   { name: 'documentNumber', label: 'Número de documento', autoComplete: 'off', span: 6, hint: 'Cédula o pasaporte, sin puntos ni espacios' },
   { name: 'phone', label: 'Teléfono', autoComplete: 'tel', span: 6, hint: 'Incluye el indicativo del país, por ejemplo +57' },
-  { name: 'email', label: 'Correo electrónico', autoComplete: 'email', span: 12, type: 'email', hint: 'Enviaremos la confirmación de la reserva a este correo' },
+  { name: 'email', label: 'Correo electrónico', autoComplete: 'email', span: 6, type: 'email', hint: 'Enviaremos la confirmación de la reserva a este correo' },
 ]
 
 /**
@@ -25,7 +25,7 @@ function GuestForm({ values, errors, onChange, onSubmit, disabled = false }) {
   return (
     <Box component="form" noValidate onSubmit={onSubmit} aria-label="Formulario de datos del huésped">
       <Stack spacing={3}>
-        <Typography variant="h6" component="h2">
+        <Typography variant="h3" component="h2">
           Datos del huésped
         </Typography>
         <Grid container spacing={2}>
@@ -48,11 +48,16 @@ function GuestForm({ values, errors, onChange, onSubmit, disabled = false }) {
             </Grid>
           ))}
         </Grid>
-        <Stack direction="row" justifyContent="flex-end">
-          <Button type="submit" variant="contained" size="large" disabled={disabled} aria-label="Confirmar reserva con los datos del huésped">
-            Confirmar reserva
-          </Button>
-        </Stack>
+        <Button
+          type="submit"
+          variant="contained"
+          size="large"
+          disabled={disabled}
+          aria-label="Confirmar reserva con los datos del huésped"
+          sx={{ width: { xs: '100%', md: 'auto' }, alignSelf: { md: 'flex-end' }, minWidth: { md: 240 } }}
+        >
+          Confirmar reserva
+        </Button>
       </Stack>
     </Box>
   )
