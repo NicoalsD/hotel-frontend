@@ -88,7 +88,7 @@ function StayActions({ reservation, onCheckedIn, onCheckedOut }) {
     <Card variant="outlined" component="section" aria-labelledby="proximo-paso">
       <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
         <Stack spacing={2}>
-          <Typography id="proximo-paso" variant="h5" component="h2">
+          <Typography id="proximo-paso" variant="h4" component="h2">
             Próximo paso
           </Typography>
           {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
