@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import SearchOffIcon from '@mui/icons-material/SearchOff'
 import EventAvailableIcon from '@mui/icons-material/EventAvailable'
@@ -7,9 +8,8 @@ import PageContainer from '../components/layout/PageContainer.jsx'
 import EmptyState from '../components/common/EmptyState.jsx'
 import ErrorAlert from '../components/common/ErrorAlert.jsx'
 import LoadingState from '../components/common/LoadingState.jsx'
-import AvailabilityLegend from '../components/search/AvailabilityLegend.jsx'
-import AvailabilitySummary from '../components/search/AvailabilitySummary.jsx'
-import RoomGrid from '../components/search/RoomGrid.jsx'
+import ResultsToolbar from '../components/search/ResultsToolbar.jsx'
+import RoomResultCard from '../components/search/RoomResultCard.jsx'
 import SearchFilters from '../components/search/SearchFilters.jsx'
 import SearchForm from '../components/search/SearchForm.jsx'
 import StaySeasonPanel from '../components/search/StaySeasonPanel.jsx'
@@ -90,9 +90,18 @@ function SearchPage() {
   } else {
     content = (
       <Stack spacing={3}>
-        <AvailabilitySummary checkIn={checkIn} checkOut={checkOut} rooms={rooms} />
-        <AvailabilityLegend />
-        <RoomGrid rooms={rooms} onSelect={handleSelect} />
+        <ResultsToolbar
+          availableCount={rooms.filter((room) => room.available).length}
+          totalCount={rooms.length}
+          visibleCount={rooms.length}
+        />
+        <Stack component="ul" aria-label="Habitaciones" spacing={2.5} sx={{ listStyle: 'none', p: 0, m: 0 }}>
+          {rooms.map((room) => (
+            <Box component="li" key={room.roomId}>
+              <RoomResultCard room={room} onSelect={handleSelect} />
+            </Box>
+          ))}
+        </Stack>
       </Stack>
     )
   }
