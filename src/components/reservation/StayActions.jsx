@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import Alert from '@mui/material/Alert'
+import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
 import Card from '@mui/material/Card'
-import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import Stack from '@mui/material/Stack'
 import Tooltip from '@mui/material/Tooltip'
@@ -85,45 +85,55 @@ function StayActions({ reservation, onCheckedIn, onCheckedOut }) {
   }
 
   return (
-    <Card variant="outlined" component="section" aria-labelledby="acciones-estadia">
-      <CardContent>
+    <Card variant="outlined" component="section" aria-labelledby="proximo-paso">
+      <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
         <Stack spacing={2}>
-          <Typography id="acciones-estadia" variant="h6" component="h2">
-            Acciones de estadía
+          <Typography id="proximo-paso" variant="h5" component="h2">
+            Próximo paso
           </Typography>
           {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
+          {reservation.canCheckIn && (
+            <Typography color="text.secondary">Realiza el check-in para recibir tu llave digital.</Typography>
+          )}
+          {reservation.canCheckOut && (
+            <Typography color="text.secondary">Al hacer check-out se cierra la estadía y se genera la factura.</Typography>
+          )}
           {!reservation.canCheckIn && !reservation.canCheckOut && (
             <Typography color="text.secondary">No hay acciones disponibles para el estado actual.</Typography>
           )}
+          <Stack spacing={1.5}>
+            <Tooltip title={checkInReason ?? ''} disableHoverListener={checkInReason === null}>
+              <Box component="span" sx={{ display: 'block' }}>
+                <Button
+                  variant="contained"
+                  size="large"
+                  fullWidth
+                  disabled={!reservation.canCheckIn || loading}
+                  startIcon={loading && isCheckIn ? <CircularProgress size={16} color="inherit" /> : null}
+                  onClick={() => setPendingAction('checkIn')}
+                >
+                  Check-in
+                </Button>
+              </Box>
+            </Tooltip>
+            <Tooltip title={checkOutReason ?? ''} disableHoverListener={checkOutReason === null}>
+              <Box component="span" sx={{ display: 'block' }}>
+                <Button
+                  variant="outlined"
+                  color="warning"
+                  size="large"
+                  fullWidth
+                  disabled={!reservation.canCheckOut || loading}
+                  startIcon={loading && !isCheckIn ? <CircularProgress size={16} color="inherit" /> : null}
+                  onClick={() => setPendingAction('checkOut')}
+                >
+                  Check-out
+                </Button>
+              </Box>
+            </Tooltip>
+          </Stack>
         </Stack>
       </CardContent>
-      <CardActions sx={{ px: 2, pb: 2 }}>
-        <Tooltip title={checkInReason ?? ''} disableHoverListener={checkInReason === null}>
-          <span>
-            <Button
-              variant="contained"
-              disabled={!reservation.canCheckIn || loading}
-              startIcon={loading && isCheckIn ? <CircularProgress size={16} color="inherit" /> : null}
-              onClick={() => setPendingAction('checkIn')}
-            >
-              Check-in
-            </Button>
-          </span>
-        </Tooltip>
-        <Tooltip title={checkOutReason ?? ''} disableHoverListener={checkOutReason === null}>
-          <span>
-            <Button
-              variant="outlined"
-              color="warning"
-              disabled={!reservation.canCheckOut || loading}
-              startIcon={loading && !isCheckIn ? <CircularProgress size={16} color="inherit" /> : null}
-              onClick={() => setPendingAction('checkOut')}
-            >
-              Check-out
-            </Button>
-          </span>
-        </Tooltip>
-      </CardActions>
       <ConfirmActionDialog
         open={pendingAction !== null}
         {...dialogProps}
