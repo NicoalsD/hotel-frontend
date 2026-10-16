@@ -75,15 +75,15 @@ function ReservationDetailPage() {
         )}
         {reservation && (
           <Grid container spacing={3}>
-            <Grid size={{ xs: 12, md: 7 }}>
+            <Grid size={{ xs: 12, md: 8 }}>
               <Stack spacing={3}>
                 <StayOverviewCard reservation={reservation} />
                 <GuestInfoCard guest={reservation.guest} />
                 <ServicesPanel reservation={reservation} onUpdated={handleServiceAdded} />
               </Stack>
             </Grid>
-            <Grid size={{ xs: 12, md: 5 }}>
-              <Stack spacing={3}>
+            <Grid size={{ xs: 12, md: 4 }}>
+              <Stack spacing={3} sx={{ position: { md: 'sticky' }, top: 24 }}>
                 <StayActions
                   reservation={reservation}
                   onCheckedIn={handleCheckedIn}
