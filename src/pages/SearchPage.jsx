@@ -61,7 +61,12 @@ function SearchPage() {
   } else if (loading) {
     content = <LoadingState message="Consultando disponibilidad..." />
   } else if (error) {
-    content = <ErrorAlert message={error.message} onRetry={handleRetry} />
+    content = (
+      <ErrorAlert
+        message={error.message || 'No fue posible consultar la disponibilidad. Intenta de nuevo.'}
+        onRetry={handleRetry}
+      />
+    )
   } else if (!rooms || rooms.length === 0) {
     content = (
       <EmptyState
