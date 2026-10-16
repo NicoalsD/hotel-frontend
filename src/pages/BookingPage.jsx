@@ -28,6 +28,9 @@ function BookingPage() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [guest, setGuest] = useState({ fullName: '', documentNumber: '', email: '', phone: '' })
   const [guestErrors, setGuestErrors] = useState({})
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState(null)
+  const [createdReservation, setCreatedReservation] = useState(null)
   const checkIn = searchParams.get('checkIn') ?? ''
   const checkOut = searchParams.get('checkOut') ?? ''
   const dateErrors = StayDateValidator.validate(checkIn, checkOut)
@@ -59,9 +62,33 @@ function BookingPage() {
    * Valida los datos del huésped antes de enviar la reserva.
    * @param {import('react').FormEvent} event Evento de envío.
    */
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    setGuestErrors(GuestValidator.validate(guest))
+    const errors = GuestValidator.validate(guest)
+    setGuestErrors(errors)
+    setSubmitError(null)
+    if (Object.keys(errors).length > 0) {
+      return
+    }
+    if (!datesValid) {
+      setSubmitError('Revisa las fechas de la estadía antes de confirmar la reserva.')
+      return
+    }
+
+    setSubmitting(true)
+    try {
+      const reservation = await hotelApiService.createReservation({
+        roomId: room.id,
+        checkIn,
+        checkOut,
+        guest: new Guest(guest),
+      })
+      setCreatedReservation(reservation)
+    } catch (error) {
+      setSubmitError(error?.message || 'No fue posible crear la reserva. Intenta de nuevo.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   /**
@@ -145,12 +172,14 @@ function BookingPage() {
         ) : (
           <Alert severity="info">Selecciona fechas válidas para ver el precio de la estadía.</Alert>
         )}
+        {submitError && <ErrorAlert message={submitError} />}
         <Paper variant="outlined" sx={{ p: 3 }}>
           <GuestForm
             values={guest}
             errors={guestErrors}
             onChange={handleGuestChange}
             onSubmit={handleSubmit}
+            disabled={submitting}
           />
         </Paper>
       </Stack>
