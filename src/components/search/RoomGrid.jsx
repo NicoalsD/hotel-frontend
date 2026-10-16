@@ -9,7 +9,13 @@ import RoomCard from './RoomCard.jsx'
  */
 function RoomGrid({ rooms, onSelect }) {
   return (
-    <Grid container spacing={3} component="ul" aria-label="Habitaciones" sx={{ listStyle: 'none', p: 0, m: 0 }}>
+    <Grid
+      container
+      spacing={3}
+      component="ul"
+      aria-label="Habitaciones"
+      sx={{ listStyle: 'none', p: 0, m: 0 }}
+    >
       {rooms.map((room) => (
         <Grid key={room.roomId} size={{ xs: 12, sm: 6, md: 4 }} component="li">
           <RoomCard room={room} onSelect={onSelect} />
