@@ -55,3 +55,9 @@ Copie `.env.example` a `.env.local` y defina:
 ## Despliegue
 
 La aplicación se publica en Vercel. El archivo `vercel.json` reenvía `/api` al backend en Elastic Beanstalk y redirige el resto de rutas a `index.html`. Consulte [docs/DESPLIEGUE.md](docs/DESPLIEGUE.md) para los pasos completos.
+
+## Integrantes
+
+- NicoalsD
+- santhiagoxinge
+- VictorAguilar202
