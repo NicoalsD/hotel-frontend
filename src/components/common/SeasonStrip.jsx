@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
+import SeasonLegendItem from './SeasonLegendItem.jsx'
 import { tokens } from '../../theme/theme.js'
 
 const MONTHS = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
@@ -51,21 +52,10 @@ function SeasonStrip({ highlightMonths = [], compact = false }) {
       </Box>
       {!compact && (
         <Stack direction="row" spacing={2.5} sx={{ flexWrap: 'wrap', rowGap: 1 }}>
-          <Legend color={tokens.amber} label="Temporada alta: tarifa base x1.5" />
-          <Legend color={tokens.ground} label="Temporada baja: tarifa base" bordered />
+          <SeasonLegendItem color={tokens.amber} label="Temporada alta: tarifa base x1.5" />
+          <SeasonLegendItem color={tokens.ground} label="Temporada baja: tarifa base" bordered />
         </Stack>
       )}
-    </Stack>
-  )
-}
-
-function Legend({ color, label, bordered = false }) {
-  return (
-    <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
-      <Box sx={{ width: 14, height: 14, borderRadius: '3px', bgcolor: color, border: bordered ? `1px solid ${tokens.line}` : 'none' }} />
-      <Typography variant="body2" color="text.secondary">
-        {label}
-      </Typography>
     </Stack>
   )
 }
