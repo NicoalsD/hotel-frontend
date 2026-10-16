@@ -62,6 +62,8 @@ function SearchForm({ initialValues, onSubmit }) {
             label="Fecha de entrada"
             value={values.checkIn}
             onChange={handleChange('checkIn')}
+            error={Boolean(errors.checkIn)}
+            helperText={errors.checkIn}
             slotProps={{ inputLabel: { shrink: true } }}
           />
         </Grid>
@@ -73,6 +75,8 @@ function SearchForm({ initialValues, onSubmit }) {
             label="Fecha de salida"
             value={values.checkOut}
             onChange={handleChange('checkOut')}
+            error={Boolean(errors.checkOut)}
+            helperText={errors.checkOut}
             slotProps={{ inputLabel: { shrink: true } }}
           />
         </Grid>
