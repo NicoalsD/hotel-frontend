@@ -15,7 +15,7 @@ function ReservationsPage() {
   return (
     <PageContainer
       title="Mis reservas"
-      subtitle="Busque una reserva por su código o revise el listado completo."
+      subtitle="Busca una reserva por su código o revisa el listado completo."
       band={<ReservationLookup />}
     >
       {reservations.loading && !reservations.data && <LoadingState message="Cargando reservas..." />}

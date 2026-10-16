@@ -23,7 +23,7 @@ function ReservationLookup() {
     event.preventDefault()
     const normalized = code.trim().toUpperCase()
     if (!CODE_PATTERN.test(normalized)) {
-      setErrorMessage('Ingrese un código válido con formato RES-n, por ejemplo RES-1001.')
+      setErrorMessage('Escribe un código válido con formato RES-n, por ejemplo RES-1001.')
       return
     }
     setSearching(true)
