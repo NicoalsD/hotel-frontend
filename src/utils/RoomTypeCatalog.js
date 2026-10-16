@@ -8,6 +8,8 @@ const CATALOG = {
     label: 'Sencilla',
     iconName: 'SingleBed',
     icon: SingleBed,
+    basePrice: 80,
+    capacity: 1,
     description: 'Habitación individual, ideal para viajeros de negocios.',
   },
   DOUBLE: {
@@ -15,6 +17,8 @@ const CATALOG = {
     label: 'Doble',
     iconName: 'KingBed',
     icon: KingBed,
+    basePrice: 120,
+    capacity: 2,
     description: 'Habitación doble con cama matrimonial, perfecta para parejas.',
   },
   SUITE: {
@@ -22,6 +26,8 @@ const CATALOG = {
     label: 'Suite',
     iconName: 'Apartment',
     icon: Apartment,
+    basePrice: 250,
+    capacity: 4,
     description: 'Suite amplia con sala independiente, para familias y grupos.',
   },
 }
@@ -32,7 +38,7 @@ const CATALOG = {
 class RoomTypeCatalog {
   /**
    * Todos los tipos de habitación en orden de presentación.
-   * @returns {Array<{type: string, label: string, iconName: string, icon: Function, description: string}>}
+   * @returns {Array<{type: string, label: string, iconName: string, icon: Function, basePrice: number, capacity: number, description: string}>}
    */
   static all() {
     return Object.values(CATALOG).map((entry) => ({ ...entry }))
@@ -41,7 +47,7 @@ class RoomTypeCatalog {
   /**
    * Busca la entrada del catálogo para un tipo.
    * @param {string} type Tipo: SINGLE, DOUBLE o SUITE.
-   * @returns {{type: string, label: string, iconName: string, icon: Function, description: string}|null}
+   * @returns {{type: string, label: string, iconName: string, icon: Function, basePrice: number, capacity: number, description: string}|null}
    */
   static find(type) {
     const entry = CATALOG[type]
