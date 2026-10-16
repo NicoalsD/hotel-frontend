@@ -27,7 +27,7 @@ function TotalRow({ label, value, strong = false }) {
  */
 function InvoiceTotals({ invoice }) {
   return (
-    <Box component="section" aria-label="Totales de la factura" sx={{ width: '100%', maxWidth: 380, ml: 'auto' }}>
+    <Box component="section" aria-label="Totales de la factura" sx={{ width: '100%', maxWidth: 380, alignSelf: 'flex-end' }}>
       <Stack spacing={1.25}>
         <TotalRow label="Subtotal habitación" value={invoice.roomSubtotal} />
         <TotalRow label="Subtotal servicios" value={invoice.servicesSubtotal} />
