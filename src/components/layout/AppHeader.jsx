@@ -1,49 +1,41 @@
-import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Container from '@mui/material/Container'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
+import BrandMark from '../brand/BrandMark.jsx'
+import { tokens } from '../../theme/theme.js'
 
 const NAV_ITEMS = [
-  { label: 'Inicio', to: '/' },
-  { label: 'Buscar', to: '/buscar' },
-  { label: 'Reservas', to: '/reservas' },
+  { label: 'Buscar habitaciones', to: '/buscar' },
+  { label: 'Mis reservas', to: '/reservas' },
 ]
 
 /**
- * Encabezado de la aplicación con la marca y la navegación principal.
+ * Encabezado azul marino con la marca y la navegación principal.
  */
 function AppHeader() {
   const { pathname } = useLocation()
 
   return (
-    <AppBar position="sticky" color="primary" elevation={0}>
+    <Box component="header" className="no-print" sx={{ bgcolor: tokens.navy, color: tokens.white }}>
       <Container maxWidth="lg">
-        <Toolbar disableGutters sx={{ gap: 2, flexWrap: 'wrap', py: 1 }}>
-          <Typography
-            variant="h6"
-            component={RouterLink}
-            to="/"
-            sx={{ color: 'inherit', textDecoration: 'none', fontWeight: 700, mr: 'auto' }}
-          >
-            Hotel Reservas
-          </Typography>
-          <Box component="nav" aria-label="Navegación principal" sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, minHeight: 64, flexWrap: 'wrap', py: 1 }}>
+          <BrandMark />
+          <Box component="nav" aria-label="Navegación principal" sx={{ display: 'flex', gap: 0.5, ml: 'auto' }}>
             {NAV_ITEMS.map((item) => {
-              const active = item.to === '/' ? pathname === '/' : pathname.startsWith(item.to)
+              const active = pathname.startsWith(item.to)
               return (
                 <Button
                   key={item.to}
                   component={RouterLink}
                   to={item.to}
-                  color="inherit"
                   aria-current={active ? 'page' : undefined}
                   sx={{
-                    borderRadius: 0,
-                    borderBottom: '2px solid',
-                    borderColor: active ? 'secondary.main' : 'transparent',
+                    color: tokens.white,
+                    fontWeight: 600,
+                    px: { xs: 1.25, sm: 2 },
+                    bgcolor: active ? 'rgba(255, 255, 255, 0.14)' : 'transparent',
+                    '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.10)' },
                   }}
                 >
                   {item.label}
@@ -51,9 +43,9 @@ function AppHeader() {
               )
             })}
           </Box>
-        </Toolbar>
+        </Box>
       </Container>
-    </AppBar>
+    </Box>
   )
 }
 
