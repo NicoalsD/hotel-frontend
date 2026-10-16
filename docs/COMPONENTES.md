@@ -32,3 +32,10 @@ Catálogo de los componentes de `src/components/`. Cada carpeta agrupa un flujo 
 - **ServicesPanel**: panel que combina el catálogo y los servicios ya agregados para una reserva activa.
 - **ServiceCatalogList**: lista del catálogo con un botón para agregar cada servicio.
 - **AddedServicesTable**: tabla de los servicios ya agregados a la reserva.
+
+## Factura (`components/invoice/`)
+
+- **InvoiceView**: factura completa generada por el servidor, con botón para imprimir.
+- **InvoiceHeader**: encabezado con los datos de la factura, mediante el componente interno `Field` (par etiqueta-valor).
+- **InvoiceLinesTable**: líneas de la factura: estadía por temporada y servicios adicionales.
+- **InvoiceTotals**: filas de totales con etiqueta a la izquierda y monto a la derecha.
