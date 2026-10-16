@@ -4,7 +4,6 @@ import Reservation from '../models/Reservation.js'
 import Room from '../models/Room.js'
 import RoomAvailability from '../models/RoomAvailability.js'
 import ServiceCatalogItem from '../models/ServiceCatalogItem.js'
-import HttpClient from './HttpClient.js'
 
 const BASE_PATH = '/api/hotel'
 
