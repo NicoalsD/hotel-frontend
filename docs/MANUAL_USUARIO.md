@@ -53,3 +53,14 @@ El check-in registra la llegada del huésped y emite la llave digital de la habi
 4. Cuando el proceso termina, aparece la notificación **Check-in realizado** y la tarjeta **Llave digital** muestra el código de la llave.
 
 El botón **Check-in** solo está habilitado para reservas confirmadas. Si pasa el cursor sobre el botón deshabilitado, aparece un mensaje que explica el motivo (por ejemplo, que el check-in ya fue realizado o que la estadía finalizó).
+
+## 5. Agregar servicios
+
+Los servicios adicionales se pueden agregar mientras la reserva esté confirmada o con check-in realizado.
+
+1. Abra la reserva desde **Reservas**.
+2. En la sección **Servicios adicionales** revise el catálogo. Cada servicio indica su descripción, su precio y si el cobro es de **Precio único** o **Por noche**.
+3. Pulse **Agregar** junto al servicio deseado. Mientras se registra, el botón muestra un indicador de progreso.
+4. Al terminar, aparece la notificación **Servicio agregado** y el servicio queda en la tabla de servicios agregados.
+
+Si la reserva está finalizada, el catálogo se muestra deshabilitado y un aviso indica que los servicios solo pueden agregarse a reservas activas.
