@@ -16,12 +16,12 @@ function SelectedRoomCard({ room }) {
   const Icon = catalogEntry?.icon
 
   return (
-    <Card variant="outlined">
+    <Card variant="outlined" component="section" aria-labelledby="selected-room-title">
       <CardContent>
         <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 2 }}>
           {Icon && <Icon aria-hidden="true" color="primary" sx={{ fontSize: 40 }} />}
           <Stack>
-            <Typography variant="h6" component="h2">
+            <Typography variant="h6" component="h2" id="selected-room-title">
               Habitación {room.number}
             </Typography>
             <Typography color="text.secondary">{room.typeLabel}</Typography>

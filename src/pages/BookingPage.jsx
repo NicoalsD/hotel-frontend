@@ -147,7 +147,7 @@ function BookingPage() {
                 value={checkIn}
                 onChange={(event) => handleDateChange('checkIn', event.target.value)}
                 error={Boolean(dateErrors.checkIn)}
-                helperText={dateErrors.checkIn ?? ' '}
+                helperText={dateErrors.checkIn ?? 'Día de llegada al hotel'}
                 slotProps={{ inputLabel: { shrink: true } }}
               />
             </Grid>
@@ -159,7 +159,7 @@ function BookingPage() {
                 value={checkOut}
                 onChange={(event) => handleDateChange('checkOut', event.target.value)}
                 error={Boolean(dateErrors.checkOut)}
-                helperText={dateErrors.checkOut ?? ' '}
+                helperText={dateErrors.checkOut ?? 'Día en que dejas la habitación'}
                 slotProps={{ inputLabel: { shrink: true } }}
               />
             </Grid>
