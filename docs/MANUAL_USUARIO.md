@@ -32,3 +32,13 @@ El proceso de reserva tiene tres pasos, indicados en la barra de progreso:
 3. **Confirmación**: verifique los datos y pulse el botón para confirmar la reserva.
 
 Al confirmar, se muestra un mensaje de éxito con el código de la reserva (formato RES-n, por ejemplo RES-1001) y el sistema lo lleva a la gestión de esa reserva.
+
+## 3. Gestionar reservas
+
+1. Ingrese a la sección **Reservas**.
+2. Para ubicar una reserva específica, escriba su código (RES-n) en el campo **Código de reserva** y pulse **Buscar reserva**. Si el código no existe, el sistema lo indica.
+3. Para revisar todas las reservas, use el listado inferior. Cada fila muestra el código, el huésped, la habitación, las fechas y el estado.
+4. Use los botones de filtro (**Todas**, **Confirmada**, **Check-in realizado** y **Finalizada**) para mostrar solo las reservas de un estado.
+5. Pulse **Gestionar** en la fila de la reserva para abrir su panel de gestión.
+
+El panel muestra el resumen de la reserva, los datos del huésped, los servicios adicionales, las acciones de estadía y la llave digital.
