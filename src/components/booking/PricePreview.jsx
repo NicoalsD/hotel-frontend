@@ -1,10 +1,11 @@
 import Chip from '@mui/material/Chip'
+import Skeleton from '@mui/material/Skeleton'
+import Tooltip from '@mui/material/Tooltip'
 import Divider from '@mui/material/Divider'
 import Paper from '@mui/material/Paper'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import ErrorAlert from '../common/ErrorAlert.jsx'
-import LoadingState from '../common/LoadingState.jsx'
 import MoneyText from '../common/MoneyText.jsx'
 import NightlyRatesTable from './NightlyRatesTable.jsx'
 
@@ -18,7 +19,13 @@ import NightlyRatesTable from './NightlyRatesTable.jsx'
  */
 function PricePreview({ quote, loading, error, onRetry }) {
   if (loading && !quote) {
-    return <LoadingState message="Calculando precio..." />
+    return (
+      <Paper variant="outlined" sx={{ p: 3 }} role="status" aria-label="Calculando precio">
+        <Skeleton variant="text" width="40%" height={32} />
+        <Skeleton variant="rounded" height={120} sx={{ my: 2 }} />
+        <Skeleton variant="text" width="30%" height={32} />
+      </Paper>
+    )
   }
   if (error) {
     return <ErrorAlert message={error.message} onRetry={onRetry} />
