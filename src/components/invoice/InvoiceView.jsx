@@ -35,7 +35,7 @@ function InvoiceView({ invoice }) {
           <InvoiceLinesTable lines={invoice.lines} />
           <InvoiceTotals invoice={invoice} />
           <Divider />
-          <Box>
+          <Box sx={{ '@media print': { breakInside: 'avoid' } }}>
             <Typography variant="caption" color="text.secondary" textTransform="uppercase">
               Código de llave digital
             </Typography>
