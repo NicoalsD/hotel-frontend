@@ -78,8 +78,8 @@ function ReservationDetailPage() {
             <Grid size={{ xs: 12, md: 8 }}>
               <Stack spacing={3}>
                 <StayOverviewCard reservation={reservation} />
-                <GuestInfoCard guest={reservation.guest} />
                 <ServicesPanel reservation={reservation} onUpdated={handleServiceAdded} />
+                <GuestInfoCard guest={reservation.guest} />
               </Stack>
             </Grid>
             <Grid size={{ xs: 12, md: 4 }}>
