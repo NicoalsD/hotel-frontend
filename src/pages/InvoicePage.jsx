@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link as RouterLink, useLocation, useParams } from 'react-router-dom'
 import Button from '@mui/material/Button'
+import GlobalStyles from '@mui/material/GlobalStyles'
 import Stack from '@mui/material/Stack'
 import { alpha } from '@mui/material/styles'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
@@ -13,6 +14,14 @@ import LoadingState from '../components/common/LoadingState.jsx'
 import hotelApiService from '../api/hotelApiInstance.js'
 import useAsync from '../hooks/useAsync.js'
 import { tokens } from '../theme/theme.js'
+
+// Al imprimir solo queda la hoja de la factura: sin márgenes de página ni notificaciones.
+const printStyles = {
+  '@media print': {
+    main: { paddingTop: '0 !important', paddingBottom: '0 !important' },
+    '.MuiSnackbar-root': { display: 'none !important' },
+  },
+}
 
 const bandButtonSx = {
   color: tokens.white,
@@ -52,6 +61,7 @@ function InvoicePage() {
       subtitle={`Reserva ${reservationId}`}
       actions={actions}
     >
+      <GlobalStyles styles={printStyles} />
       <Stack spacing={3}>
         {invoice.loading && !invoice.data && <LoadingState message="Cargando factura..." />}
         {invoice.error && <ErrorAlert message={invoice.error.message} onRetry={() => invoice.execute()} />}
