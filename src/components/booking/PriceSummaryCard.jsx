@@ -21,7 +21,7 @@ import { tokens } from '../../theme/theme.js'
  */
 function SummaryRow({ label, value }) {
   return (
-    <Stack direction="row" spacing={2} justifyContent="space-between">
+    <Stack direction="row" spacing={2} sx={{ justifyContent: 'space-between' }}>
       <Typography variant="body2" color="text.secondary">
         {label}
       </Typography>
@@ -80,7 +80,7 @@ function PriceSummaryCard({ room, checkIn, checkOut, quote, datesValid, loading,
         {datesValid && error && <ErrorAlert message={error.message} onRetry={onRetry} />}
         {datesValid && quote && (
           <>
-            <Stack direction="row" justifyContent="space-between" alignItems="baseline" sx={{ mb: 1 }}>
+            <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'baseline', mb: 1 }}>
               <Typography variant="subtitle2">Precio por noche</Typography>
               <Typography variant="body2" color="text.secondary">
                 {quote.nights} {quote.nights === 1 ? 'noche' : 'noches'}
@@ -92,7 +92,7 @@ function PriceSummaryCard({ room, checkIn, checkOut, quote, datesValid, loading,
               ))}
             </Box>
             <Divider sx={{ my: 2 }} />
-            <Stack direction="row" justifyContent="space-between" alignItems="center">
+            <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
               <Typography variant="h5" component="p">
                 Total
               </Typography>

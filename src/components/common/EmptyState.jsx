@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography'
  */
 function EmptyState({ title, description, icon, titleComponent = 'h2', children }) {
   return (
-    <Stack alignItems="center" spacing={2} sx={{ py: 6, textAlign: 'center' }}>
+    <Stack spacing={2} sx={{ alignItems: 'center', py: 6, textAlign: 'center' }}>
       {icon && (
         <Box aria-hidden="true" sx={{ color: 'text.disabled', '& svg': { fontSize: 64 } }}>
           {icon}
