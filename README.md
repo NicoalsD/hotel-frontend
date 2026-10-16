@@ -61,3 +61,9 @@ La aplicación se publica en Vercel. El archivo `vercel.json` reenvía `/api` al
 - NicoalsD
 - santhiagoxinge
 - VictorAguilar202
+
+## Funcionalidades por integrante
+
+- **NicoalsD**: modelos de dominio, cliente de la API (`HttpClient` y `HotelApiService`), layout de la aplicación y buscador de disponibilidad.
+- **santhiagoxinge**: flujo de reserva y vista previa de precio.
+- **VictorAguilar202**: panel de gestión de reservas y factura.
