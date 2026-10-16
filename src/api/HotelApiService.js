@@ -55,8 +55,6 @@ class HotelApiService {
     const json = await this.httpClient.get(`${BASE_PATH}/habitaciones`)
     return json.map((item) => Room.fromJson(item))
   }
-}
-
   /**
    * Crea una reserva para una habitación y un huésped.
    * @param {{roomId: number, checkIn: string, checkOut: string, guest: import('../models/Guest.js').default|Object}} request
@@ -91,8 +89,6 @@ class HotelApiService {
     const json = await this.httpClient.get(`${BASE_PATH}/reservas`)
     return json.map((item) => Reservation.fromJson(item))
   }
-}
-
   /**
    * Agrega un servicio adicional a una reserva activa.
    * @param {string} reservationId Código de reserva.
