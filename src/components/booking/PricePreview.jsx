@@ -39,7 +39,7 @@ function PricePreview({ quote, loading, error, onRetry }) {
       <Typography variant="h6" component="h2" gutterBottom>
         Resumen de precio
       </Typography>
-      <Stack direction="row" spacing={1} useFlexGap sx={{ flexWrap: 'wrap', mb: 2 }}>
+      <Stack direction="row" spacing={1} useFlexGap sx={{ flexWrap: 'wrap', mb: 2 }} role="group" aria-label="Resumen de noches y temporadas">
         <Chip size="small" label={`${quote.nights} ${quote.nights === 1 ? 'noche' : 'noches'}`} />
         {quote.hasHighSeason && (
           <Tooltip title="Temporada alta: las noches de alta demanda tienen una tarifa mayor." arrow>
