@@ -11,6 +11,7 @@ import GuestInfoCard from '../components/reservation/GuestInfoCard.jsx'
 import ReservationSummary from '../components/reservation/ReservationSummary.jsx'
 import ServicesPanel from '../components/reservation/ServicesPanel.jsx'
 import StayActions from '../components/reservation/StayActions.jsx'
+import ActionSnackbar from '../components/common/ActionSnackbar.jsx'
 import ErrorAlert from '../components/common/ErrorAlert.jsx'
 import LoadingState from '../components/common/LoadingState.jsx'
 import hotelApiService from '../api/hotelApiInstance.js'
@@ -25,6 +26,12 @@ function ReservationDetailPage() {
   const navigate = useNavigate()
   const fetched = useAsync(() => hotelApiService.getReservation(reservationId), [reservationId])
   const [updated, setUpdated] = useState(null)
+  const [feedback, setFeedback] = useState(null)
+
+  function handleServiceAdded(reservationUpdated) {
+    setUpdated(reservationUpdated)
+    setFeedback('Servicio agregado')
+  }
 
   const reservation = updated && updated.id === reservationId ? updated : fetched.data
 
@@ -44,7 +51,7 @@ function ReservationDetailPage() {
               <Stack spacing={3}>
                 <ReservationSummary reservation={reservation} />
                 <GuestInfoCard guest={reservation.guest} />
-                <ServicesPanel reservation={reservation} onUpdated={setUpdated} />
+                <ServicesPanel reservation={reservation} onUpdated={handleServiceAdded} />
               </Stack>
             </Grid>
             <Grid size={{ xs: 12, md: 5 }}>
@@ -63,6 +70,7 @@ function ReservationDetailPage() {
           <Typography color="text.secondary">Esta estadía ya finalizó.</Typography>
         )}
       </Stack>
+      <ActionSnackbar message={feedback} onClose={() => setFeedback(null)} />
     </PageContainer>
   )
 }
