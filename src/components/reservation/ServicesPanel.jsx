@@ -42,7 +42,7 @@ function ServicesPanel({ reservation, onUpdated }) {
       <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
         <Stack spacing={2.5}>
           <Box>
-            <Typography id="servicios-reserva" variant="h5" component="h2">
+            <Typography id="servicios-reserva" variant="h4" component="h2">
               Servicios adicionales
             </Typography>
             <Typography color="text.secondary">Agrega servicios a la estadía; se suman al total de la reserva.</Typography>
