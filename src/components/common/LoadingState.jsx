@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography'
  */
 function LoadingState({ message = 'Cargando...' }) {
   return (
-    <Stack role="status" aria-live="polite" alignItems="center" spacing={2} sx={{ py: 6 }}>
+    <Stack role="status" aria-live="polite" spacing={2} sx={{ alignItems: 'center', py: 6 }}>
       <CircularProgress aria-label={message} />
       <Typography color="text.secondary">{message}</Typography>
     </Stack>

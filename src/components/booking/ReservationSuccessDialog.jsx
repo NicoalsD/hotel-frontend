@@ -28,7 +28,7 @@ function ReservationSuccessDialog({ open, reservationId, onContinue }) {
       fullWidth
     >
       <DialogTitle id="reservation-success-title" sx={{ pb: 1 }}>
-        <Stack direction="row" spacing={1.25} alignItems="center">
+        <Stack direction="row" spacing={1.25} sx={{ alignItems: 'center' }}>
           <CheckCircle sx={{ color: tokens.success }} aria-hidden="true" />
           <span>Reserva confirmada</span>
         </Stack>

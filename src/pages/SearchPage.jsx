@@ -12,6 +12,7 @@ import ErrorAlert from '../components/common/ErrorAlert.jsx'
 import ResultsToolbar from '../components/search/ResultsToolbar.jsx'
 import RoomResultCard from '../components/search/RoomResultCard.jsx'
 import RoomResultSkeleton from '../components/search/RoomResultSkeleton.jsx'
+import FiltersToggleButton from '../components/search/FiltersToggleButton.jsx'
 import SearchFilters from '../components/search/SearchFilters.jsx'
 import SearchForm from '../components/search/SearchForm.jsx'
 import StaySeasonPanel from '../components/search/StaySeasonPanel.jsx'
@@ -31,6 +32,7 @@ const ROOM_SORTERS = {
 function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
+  const [filtersOpen, setFiltersOpen] = useState(false)
 
   const checkIn = searchParams.get('checkIn') ?? ''
   const checkOut = searchParams.get('checkOut') ?? ''
@@ -166,7 +168,12 @@ function SearchPage() {
     >
       {hasValidRange ? (
         <Stack direction={{ xs: 'column', md: 'row' }} spacing={3} sx={{ alignItems: 'flex-start' }}>
-          <Stack spacing={2.5} sx={{ width: { xs: '100%', md: 300 }, flexShrink: 0 }}>
+          <FiltersToggleButton open={filtersOpen} onToggle={() => setFiltersOpen((open) => !open)} />
+          <Stack
+            id="search-sidebar"
+            spacing={2.5}
+            sx={{ width: { xs: '100%', md: 300 }, flexShrink: 0, display: { xs: filtersOpen ? 'flex' : 'none', md: 'flex' } }}
+          >
             <SearchFilters
               roomType={roomType}
               onRoomTypeChange={handleRoomTypeChange}

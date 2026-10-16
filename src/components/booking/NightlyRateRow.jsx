@@ -26,7 +26,7 @@ function NightlyRateRow({ rate }) {
   const seasonName = high ? 'Alta' : 'Baja'
 
   return (
-    <Stack component="li" direction="row" spacing={1.5} alignItems="center" sx={{ py: 1 }}>
+    <Stack component="li" direction="row" spacing={1.5} sx={{ alignItems: 'center', py: 1 }}>
       <Typography variant="body2" sx={{ flexGrow: 1, minWidth: 0 }}>
         {formatNight(rate.date)}
       </Typography>

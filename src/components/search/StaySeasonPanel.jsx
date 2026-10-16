@@ -35,7 +35,7 @@ function StaySeasonPanel({ checkIn, checkOut }) {
         <Typography id="stay-season-title" variant="h5" component="h2">
           Temporadas del año
         </Typography>
-        <SeasonStrip compact highlightMonths={hasStay ? monthsOfStay(checkIn, checkOut) : []} />
+        <SeasonStrip compact initials highlightMonths={hasStay ? monthsOfStay(checkIn, checkOut) : []} />
         <Typography variant="body2" color="text.secondary">
           {hasStay
             ? 'El recuadro marca los meses de tu estancia. Los meses en ámbar son temporada alta.'
