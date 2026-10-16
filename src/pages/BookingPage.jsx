@@ -103,7 +103,7 @@ function BookingPage() {
 
   if (rooms.loading && !rooms.data) {
     return (
-      <PageContainer title="Reservar habitación">
+      <PageContainer title="Confirma tu reserva">
         <LoadingState message="Cargando habitación..." />
       </PageContainer>
     )
@@ -111,7 +111,7 @@ function BookingPage() {
 
   if (rooms.error) {
     return (
-      <PageContainer title="Reservar habitación">
+      <PageContainer title="Confirma tu reserva">
         <ErrorAlert message={rooms.error.message} onRetry={() => rooms.execute().catch(() => {})} />
       </PageContainer>
     )
@@ -119,7 +119,7 @@ function BookingPage() {
 
   if (!room) {
     return (
-      <PageContainer title="Reservar habitación">
+      <PageContainer title="Confirma tu reserva">
         <EmptyState title="Habitación no encontrada" description="Revisa la habitación seleccionada e intenta de nuevo." />
       </PageContainer>
     )
