@@ -19,3 +19,16 @@ Catálogo de los componentes de `src/components/`. Cada carpeta agrupa un flujo 
 - **NightlyRatesTable**: tabla con el precio de cada noche y su temporada.
 - **GuestForm**: formulario controlado de nombre, documento, teléfono y correo. La validación la realiza `BookingPage` con `GuestValidator`.
 - **ReservationSuccessDialog**: diálogo que confirma la reserva creada y muestra su código.
+
+## Gestión de reservas (`components/reservation/`)
+
+- **ReservationLookup**: buscador por código con el formato `RES-n`. Al encontrar la reserva navega a su gestión.
+- **ReservationList**: tabla con todas las reservas, de la más reciente a la más antigua.
+- **ReservationSummary**: resumen de fechas, noches, habitación y totales.
+- **GuestInfoCard**: datos del huésped titular.
+- **StayActions**: botones de check-in y check-out, cada uno con confirmación previa.
+- **ConfirmActionDialog**: diálogo genérico de confirmación para acciones irreversibles.
+- **DigitalKeyCard**: tarjeta con la llave digital emitida en el check-in.
+- **ServicesPanel**: panel que combina el catálogo y los servicios ya agregados para una reserva activa.
+- **ServiceCatalogList**: lista del catálogo con un botón para agregar cada servicio.
+- **AddedServicesTable**: tabla de los servicios ya agregados a la reserva.
