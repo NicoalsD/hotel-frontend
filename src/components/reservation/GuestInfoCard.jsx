@@ -28,14 +28,14 @@ function InfoLine({ icon, children }) {
 function GuestInfoCard({ guest }) {
   return (
     <Card variant="outlined" component="section" aria-labelledby="datos-huesped">
-      <CardContent>
+      <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
         <Stack spacing={1.5}>
-          <Typography id="datos-huesped" variant="h6" component="h2">
+          <Typography id="datos-huesped" variant="h5" component="h2">
             Datos del huésped
           </Typography>
           {guest ? (
             <>
-              <Typography variant="subtitle1" fontWeight={600}>
+              <Typography sx={{ fontWeight: 700 }}>
                 {guest.fullName}
               </Typography>
               <InfoLine icon={<BadgeIcon fontSize="small" />}>Documento: {guest.documentNumber}</InfoLine>
