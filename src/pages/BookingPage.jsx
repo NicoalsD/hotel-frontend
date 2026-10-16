@@ -1,5 +1,5 @@
-import { useMemo } from 'react'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useMemo, useState } from 'react'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import Paper from '@mui/material/Paper'
 import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
@@ -16,6 +16,9 @@ import BookingStepper from '../components/booking/BookingStepper.jsx'
 import SelectedRoomCard from '../components/booking/SelectedRoomCard.jsx'
 import StayDateValidator from '../utils/StayDateValidator.js'
 import PricePreview from '../components/booking/PricePreview.jsx'
+import GuestForm from '../components/booking/GuestForm.jsx'
+import Guest from '../models/Guest.js'
+import GuestValidator from '../utils/GuestValidator.js'
 
 /**
  * Página de reserva para una habitación: resumen, fechas, precio, datos del huésped y confirmación.
@@ -23,6 +26,8 @@ import PricePreview from '../components/booking/PricePreview.jsx'
 function BookingPage() {
   const { roomId } = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
+  const [guest, setGuest] = useState({ fullName: '', documentNumber: '', email: '', phone: '' })
+  const [guestErrors, setGuestErrors] = useState({})
   const checkIn = searchParams.get('checkIn') ?? ''
   const checkOut = searchParams.get('checkOut') ?? ''
   const dateErrors = StayDateValidator.validate(checkIn, checkOut)
@@ -39,6 +44,25 @@ function BookingPage() {
     () => (roomType && datesValid ? hotelApiService.getPriceQuote(roomType, checkIn, checkOut) : null),
     [roomType, checkIn, checkOut],
   )
+
+  /**
+   * Actualiza un campo del huésped y limpia su error.
+   * @param {string} name Campo del formulario.
+   * @param {string} value Nuevo valor.
+   */
+  const handleGuestChange = (name, value) => {
+    setGuest((previous) => ({ ...previous, [name]: value }))
+    setGuestErrors((previous) => ({ ...previous, [name]: undefined }))
+  }
+
+  /**
+   * Valida los datos del huésped antes de enviar la reserva.
+   * @param {import('react').FormEvent} event Evento de envío.
+   */
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    setGuestErrors(GuestValidator.validate(guest))
+  }
 
   /**
    * Actualiza una fecha en la URL sin perder el resto de parámetros.
@@ -121,6 +145,14 @@ function BookingPage() {
         ) : (
           <Alert severity="info">Selecciona fechas válidas para ver el precio de la estadía.</Alert>
         )}
+        <Paper variant="outlined" sx={{ p: 3 }}>
+          <GuestForm
+            values={guest}
+            errors={guestErrors}
+            onChange={handleGuestChange}
+            onSubmit={handleSubmit}
+          />
+        </Paper>
       </Stack>
     </PageContainer>
   )
