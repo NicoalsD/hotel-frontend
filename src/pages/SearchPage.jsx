@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
+import FilterListOffIcon from '@mui/icons-material/FilterListOff'
 import SearchOffIcon from '@mui/icons-material/SearchOff'
 import EventAvailableIcon from '@mui/icons-material/EventAvailable'
 import PageContainer from '../components/layout/PageContainer.jsx'
@@ -67,6 +69,11 @@ function SearchPage() {
     setSearchParams(params)
   }
 
+  const handleClearFilters = () => {
+    setAvailableOnly(false)
+    handleRoomTypeChange('')
+  }
+
   const handleRetry = () => {
     execute().catch(() => {})
   }
@@ -101,7 +108,25 @@ function SearchPage() {
         icon={<SearchOffIcon fontSize="inherit" />}
         title="No hay habitaciones para este filtro"
         description="Prueba con otro tipo de habitación o con otras fechas."
-      />
+      >
+        {roomType && (
+          <Button variant="outlined" onClick={handleClearFilters}>
+            Quitar filtros
+          </Button>
+        )}
+      </EmptyState>
+    )
+  } else if (visibleRooms.length === 0) {
+    content = (
+      <EmptyState
+        icon={<FilterListOffIcon fontSize="inherit" />}
+        title="Ninguna habitación coincide con tus filtros"
+        description="Quita el filtro de disponibilidad para ver también las habitaciones ocupadas en tus fechas."
+      >
+        <Button variant="outlined" onClick={handleClearFilters}>
+          Quitar filtros
+        </Button>
+      </EmptyState>
     )
   } else {
     content = (
