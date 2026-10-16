@@ -10,7 +10,7 @@ import { tokens } from '../../theme/theme.js'
  */
 function TotalRow({ label, value, strong = false }) {
   return (
-    <Stack direction="row" justifyContent="space-between" alignItems="baseline" spacing={2}>
+    <Stack direction="row" spacing={2} sx={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
       <Typography sx={{ fontWeight: strong ? 800 : 400, color: strong ? tokens.navy : 'text.primary' }}>{label}</Typography>
       <MoneyText
         value={value}
