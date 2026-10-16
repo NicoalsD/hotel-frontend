@@ -70,7 +70,7 @@ function PricePreview({ quote, loading, error, onRetry }) {
         <Typography variant="h6" component="p">
           Total estimado
         </Typography>
-        <MoneyText value={quote.total} variant="h6" />
+        <MoneyText value={quote.total} variant="h6" aria-label={`Total estimado: ${quote.total}`} />
       </Stack>
     </Paper>
   )
