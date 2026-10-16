@@ -14,8 +14,9 @@ const HIGH_SEASON_MONTHS = new Set([0, 5, 6, 11])
  * @param {Object} props
  * @param {number[]} [props.highlightMonths] Meses (0-11) de la estancia a resaltar.
  * @param {boolean} [props.compact] Versión reducida sin leyenda.
+ * @param {boolean} [props.initials] Muestra solo la inicial de cada mes (columnas estrechas).
  */
-function SeasonStrip({ highlightMonths = [], compact = false }) {
+function SeasonStrip({ highlightMonths = [], compact = false, initials = false }) {
   const highlighted = new Set(highlightMonths)
 
   return (
@@ -44,7 +45,12 @@ function SeasonStrip({ highlightMonths = [], compact = false }) {
               }}
             >
               <Typography component="span" sx={{ fontSize: compact ? '0.6875rem' : '0.8125rem', fontWeight: high || inStay ? 800 : 600 }}>
-                {month}
+                <Box component="span" aria-hidden="true" sx={{ display: initials ? 'none' : { xs: 'none', sm: 'inline' } }}>
+                  {month}
+                </Box>
+                <Box component="span" aria-hidden="true" sx={{ display: initials ? 'inline' : { xs: 'inline', sm: 'none' } }}>
+                  {month.charAt(0)}
+                </Box>
               </Typography>
             </Box>
           )
