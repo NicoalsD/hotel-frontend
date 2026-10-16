@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton'
 import Stack from '@mui/material/Stack'
 import Tooltip from '@mui/material/Tooltip'
 import Typography from '@mui/material/Typography'
+import { alpha } from '@mui/material/styles'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import DateFormatter from '../../utils/DateFormatter.js'
 import { tokens } from '../../theme/theme.js'
@@ -51,7 +52,7 @@ function DigitalKeyCard({ digitalKey }) {
           </Stack>
           {digitalKey ? (
             <>
-              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.82)' }}>
+              <Typography variant="body2" sx={{ color: alpha(tokens.white, 0.82) }}>
                 Habitación {digitalKey.roomNumber}
                 {digitalKey.issuedAt && ` · Emitida el ${DateFormatter.format(digitalKey.issuedAt)}`}
               </Typography>
@@ -81,7 +82,7 @@ function DigitalKeyCard({ digitalKey }) {
               </Stack>
             </>
           ) : (
-            <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.82)' }}>
+            <Typography variant="body2" sx={{ color: alpha(tokens.white, 0.82) }}>
               La llave digital se emite al realizar el check-in.
             </Typography>
           )}
