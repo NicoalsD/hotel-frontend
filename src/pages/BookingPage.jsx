@@ -102,6 +102,7 @@ function BookingPage() {
     const next = new URLSearchParams(searchParams)
     next.set(field, value)
     setSearchParams(next, { replace: true })
+    setSubmitError(null)
   }
 
   if (rooms.loading && !rooms.data) {
