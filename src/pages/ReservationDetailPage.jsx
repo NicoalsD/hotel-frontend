@@ -28,6 +28,11 @@ function ReservationDetailPage() {
   const [updated, setUpdated] = useState(null)
   const [feedback, setFeedback] = useState(null)
 
+  function handleCheckedIn(reservationUpdated) {
+    setUpdated(reservationUpdated)
+    setFeedback('Check-in realizado')
+  }
+
   function handleServiceAdded(reservationUpdated) {
     setUpdated(reservationUpdated)
     setFeedback('Servicio agregado')
@@ -58,8 +63,12 @@ function ReservationDetailPage() {
               <Stack spacing={3}>
                 <StayActions
                   reservation={reservation}
-                  onCheckedIn={setUpdated}
-                  onCheckedOut={() => navigate(`/reservas/${reservation.id}/factura`)}
+                  onCheckedIn={handleCheckedIn}
+                  onCheckedOut={() =>
+                    navigate(`/reservas/${reservation.id}/factura`, {
+                      state: { feedback: 'Check-out realizado' },
+                    })
+                  }
                 />
                 <DigitalKeyCard digitalKey={reservation.digitalKey} />
               </Stack>
