@@ -1,7 +1,27 @@
+@import '@fontsource-variable/figtree';
+
 html,
 body,
 #root {
   min-height: 100%;
+}
+
+::selection {
+  background: #fdf3d7;
+  color: #0b2747;
+}
+
+:focus-visible {
+  outline: 3px solid #f2b01e;
+  outline-offset: 2px;
+}
+
+input[type='date'] {
+  accent-color: #0a5cc2;
+}
+
+* {
+  scrollbar-color: #a9b3c2 transparent;
 }
 
 @media print {
