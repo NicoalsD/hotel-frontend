@@ -1,4 +1,5 @@
 import Button from '@mui/material/Button'
+import CircularProgress from '@mui/material/CircularProgress'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
@@ -39,7 +40,14 @@ function ServiceCatalogList({ items, onAdd, disabled = false, pendingType = null
               disabled={disabled || pendingType !== null}
               aria-label={`Agregar ${item.label}`}
             >
-              {pendingType === item.type ? 'Agregando...' : 'Agregar'}
+              {pendingType === item.type ? (
+                <>
+                  <CircularProgress size={14} color="inherit" sx={{ mr: 1 }} />
+                  Agregando...
+                </>
+              ) : (
+                'Agregar'
+              )}
             </Button>
           }
           sx={{ pr: 14 }}
