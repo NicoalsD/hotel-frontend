@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import Stack from '@mui/material/Stack'
 import SearchOffIcon from '@mui/icons-material/SearchOff'
@@ -9,7 +10,9 @@ import LoadingState from '../components/common/LoadingState.jsx'
 import AvailabilityLegend from '../components/search/AvailabilityLegend.jsx'
 import AvailabilitySummary from '../components/search/AvailabilitySummary.jsx'
 import RoomGrid from '../components/search/RoomGrid.jsx'
+import SearchFilters from '../components/search/SearchFilters.jsx'
 import SearchForm from '../components/search/SearchForm.jsx'
+import StaySeasonPanel from '../components/search/StaySeasonPanel.jsx'
 import { hotelApiService } from '../api/hotelApiInstance.js'
 import useAsync from '../hooks/useAsync.js'
 import DateFormatter from '../utils/DateFormatter.js'
@@ -25,6 +28,8 @@ function SearchPage() {
   const checkOut = searchParams.get('checkOut') ?? ''
   const roomType = searchParams.get('roomType') ?? ''
   const hasValidRange = Boolean(checkIn && checkOut) && DateFormatter.nightsBetween(checkIn, checkOut) > 0
+  const [availableOnly, setAvailableOnly] = useState(false)
+  const [sortBy, setSortBy] = useState('number')
 
   const { data: rooms, loading, error, execute } = useAsync(
     () => (hasValidRange ? hotelApiService.searchAvailability(checkIn, checkOut, roomType || undefined) : Promise.resolve(null)),
@@ -42,6 +47,14 @@ function SearchPage() {
   const handleSelect = (room) => {
     const params = new URLSearchParams({ checkIn, checkOut })
     navigate(`/reservar/${room.roomId}?${params.toString()}`)
+  }
+
+  const handleRoomTypeChange = (type) => {
+    const params = { checkIn, checkOut }
+    if (type) {
+      params.roomType = type
+    }
+    setSearchParams(params)
   }
 
   const handleRetry = () => {
@@ -101,7 +114,26 @@ function SearchPage() {
         />
       }
     >
-      <Stack spacing={4}>{content}</Stack>
+      {hasValidRange ? (
+        <Stack direction={{ xs: 'column', md: 'row' }} spacing={3} sx={{ alignItems: 'flex-start' }}>
+          <Stack spacing={2.5} sx={{ width: { xs: '100%', md: 280 }, flexShrink: 0 }}>
+            <SearchFilters
+              roomType={roomType}
+              onRoomTypeChange={handleRoomTypeChange}
+              availableOnly={availableOnly}
+              onAvailableOnlyChange={setAvailableOnly}
+              sortBy={sortBy}
+              onSortChange={setSortBy}
+            />
+            <StaySeasonPanel checkIn={checkIn} checkOut={checkOut} />
+          </Stack>
+          <Stack spacing={3} sx={{ flex: 1, minWidth: 0, width: '100%' }}>
+            {content}
+          </Stack>
+        </Stack>
+      ) : (
+        content
+      )}
     </PageContainer>
   )
 }
