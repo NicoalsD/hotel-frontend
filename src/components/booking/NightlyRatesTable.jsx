@@ -20,9 +20,9 @@ function NightlyRatesTable({ rates }) {
       <Table size="small" aria-label="Desglose de tarifas por noche">
         <TableHead>
           <TableRow>
-            <TableCell>Noche</TableCell>
-            <TableCell>Temporada</TableCell>
-            <TableCell align="right">Precio</TableCell>
+            <TableCell scope="col">Noche</TableCell>
+            <TableCell scope="col">Temporada</TableCell>
+            <TableCell scope="col" align="right">Precio</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -34,6 +34,7 @@ function NightlyRatesTable({ rates }) {
                   size="small"
                   label={rate.seasonLabel}
                   color={rate.isHighSeason ? 'warning' : 'success'}
+                  aria-label={`Temporada: ${rate.seasonLabel}`}
                   variant="outlined"
                 />
               </TableCell>
