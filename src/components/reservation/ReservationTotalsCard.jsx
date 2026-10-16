@@ -11,7 +11,7 @@ import MoneyText from '../common/MoneyText.jsx'
  */
 function TotalLine({ label, value }) {
   return (
-    <Stack direction="row" justifyContent="space-between" alignItems="baseline" spacing={2}>
+    <Stack direction="row" spacing={2} sx={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
       <Typography color="text.secondary">{label}</Typography>
       <MoneyText value={value} sx={{ fontWeight: 600 }} />
     </Stack>
@@ -36,7 +36,7 @@ function ReservationTotalsCard({ reservation }) {
             <TotalLine label="Subtotal servicios" value={reservation.servicesTotal} />
           </Stack>
           <Divider />
-          <Stack direction="row" justifyContent="space-between" alignItems="baseline" spacing={2}>
+          <Stack direction="row" spacing={2} sx={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
             <Typography sx={{ fontWeight: 800 }}>Total estimado</Typography>
             <MoneyText value={reservation.estimatedTotal} sx={{ fontWeight: 800, fontSize: '1.5rem', color: 'text.primary' }} />
           </Stack>

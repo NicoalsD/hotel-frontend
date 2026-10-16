@@ -30,10 +30,10 @@ function InvoiceHeader({ invoice }) {
 
   return (
     <Stack spacing={3}>
-      <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between" alignItems={{ sm: 'flex-start' }} spacing={2}>
+      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ justifyContent: 'space-between', alignItems: { sm: 'flex-start' } }}>
         <BrandMark tone="dark" />
         <Box sx={{ textAlign: { xs: 'left', sm: 'right' } }}>
-          <Typography variant="h4" component="h2" sx={{ fontFamily: 'monospace', fontWeight: 800 }}>
+          <Typography variant="h4" component="h2" sx={{ fontWeight: 800, fontVariantNumeric: 'tabular-nums' }}>
             {invoice.invoiceNumber}
           </Typography>
           <Typography color="text.secondary">Emitida el {DateFormatter.format(invoice.issuedAt)}</Typography>

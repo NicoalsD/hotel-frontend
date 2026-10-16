@@ -34,7 +34,7 @@ function DigitalKeyCard({ digitalKey }) {
     <Card component="section" aria-labelledby="llave-digital" sx={{ bgcolor: tokens.navy, color: tokens.white, borderColor: tokens.navy }}>
       <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
         <Stack spacing={2}>
-          <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={1}>
+          <Stack direction="row" spacing={1} sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
             <Typography id="llave-digital" variant="h4" component="h2" sx={{ color: tokens.white }}>
               Llave digital
             </Typography>
@@ -58,9 +58,9 @@ function DigitalKeyCard({ digitalKey }) {
               </Typography>
               <Stack
                 direction="row"
-                alignItems="center"
+               
                 spacing={1}
-                sx={{ bgcolor: tokens.ground, color: tokens.ink, borderRadius: '8px', p: 1.5 }}
+                sx={{ alignItems: 'center', bgcolor: tokens.ground, color: tokens.ink, borderRadius: '8px', p: 1.5 }}
               >
                 <Typography
                   component="p"

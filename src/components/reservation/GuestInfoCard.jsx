@@ -11,7 +11,7 @@ import BadgeIcon from '@mui/icons-material/Badge'
  */
 function InfoLine({ icon, children }) {
   return (
-    <Stack direction="row" spacing={1} alignItems="center">
+    <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
       <Stack aria-hidden="true" sx={{ color: 'text.secondary' }}>
         {icon}
       </Stack>

@@ -1,39 +1,13 @@
 import { useState } from 'react'
 import Alert from '@mui/material/Alert'
-import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Stack from '@mui/material/Stack'
-import Tooltip from '@mui/material/Tooltip'
 import Typography from '@mui/material/Typography'
 import ConfirmActionDialog from './ConfirmActionDialog.jsx'
 import hotelApiService from '../../api/hotelApiInstance.js'
-
-/**
- * Explica por qué no se puede hacer check-in según el estado de la reserva.
- * @param {string} status Estado de la reserva.
- * @returns {string} Motivo en español.
- */
-function checkInBlockedReason(status) {
-  if (status === 'CHECKED_OUT') {
-    return 'La estadía ya finalizó, no admite check-in.'
-  }
-  return 'La reserva ya tiene el check-in realizado.'
-}
-
-/**
- * Explica por qué no se puede hacer check-out según el estado de la reserva.
- * @param {string} status Estado de la reserva.
- * @returns {string} Motivo en español.
- */
-function checkOutBlockedReason(status) {
-  if (status === 'CHECKED_OUT') {
-    return 'La estadía ya finalizó.'
-  }
-  return 'Primero debe realizarse el check-in de la reserva.'
-}
 
 /**
  * Acciones de check-in y check-out de la reserva, cada una con confirmación previa.
@@ -60,8 +34,6 @@ function StayActions({ reservation, onCheckedIn, onCheckedOut }) {
         confirmLabel: 'Realizar check-out',
       }
 
-  const checkInReason = reservation.canCheckIn ? null : checkInBlockedReason(reservation.status)
-  const checkOutReason = reservation.canCheckOut ? null : checkOutBlockedReason(reservation.status)
 
   async function handleConfirm() {
     setLoading(true)
@@ -99,39 +71,32 @@ function StayActions({ reservation, onCheckedIn, onCheckedOut }) {
             <Typography color="text.secondary">Al hacer check-out se cierra la estadía y se genera la factura.</Typography>
           )}
           {!reservation.canCheckIn && !reservation.canCheckOut && (
-            <Typography color="text.secondary">No hay acciones disponibles para el estado actual.</Typography>
+            <Typography color="text.secondary">La estancia terminó. Consulta la factura en el resumen de la reserva.</Typography>
           )}
-          <Stack spacing={1.5}>
-            <Tooltip title={checkInReason ?? ''} disableHoverListener={checkInReason === null}>
-              <Box component="span" sx={{ display: 'block' }}>
-                <Button
-                  variant="contained"
-                  size="large"
-                  fullWidth
-                  disabled={!reservation.canCheckIn || loading}
-                  startIcon={loading && isCheckIn ? <CircularProgress size={16} color="inherit" /> : null}
-                  onClick={() => setPendingAction('checkIn')}
-                >
-                  Check-in
-                </Button>
-              </Box>
-            </Tooltip>
-            <Tooltip title={checkOutReason ?? ''} disableHoverListener={checkOutReason === null}>
-              <Box component="span" sx={{ display: 'block' }}>
-                <Button
-                  variant="outlined"
-                  color="warning"
-                  size="large"
-                  fullWidth
-                  disabled={!reservation.canCheckOut || loading}
-                  startIcon={loading && !isCheckIn ? <CircularProgress size={16} color="inherit" /> : null}
-                  onClick={() => setPendingAction('checkOut')}
-                >
-                  Check-out
-                </Button>
-              </Box>
-            </Tooltip>
-          </Stack>
+          {reservation.canCheckIn && (
+            <Button
+              variant="contained"
+              size="large"
+              fullWidth
+              disabled={loading}
+              startIcon={loading && isCheckIn ? <CircularProgress size={16} color="inherit" /> : null}
+              onClick={() => setPendingAction('checkIn')}
+            >
+              Hacer check-in
+            </Button>
+          )}
+          {reservation.canCheckOut && (
+            <Button
+              variant="contained"
+              size="large"
+              fullWidth
+              disabled={loading}
+              startIcon={loading && !isCheckIn ? <CircularProgress size={16} color="inherit" /> : null}
+              onClick={() => setPendingAction('checkOut')}
+            >
+              Hacer check-out y generar factura
+            </Button>
+          )}
         </Stack>
       </CardContent>
       <ConfirmActionDialog
