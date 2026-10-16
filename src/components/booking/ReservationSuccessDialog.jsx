@@ -25,7 +25,7 @@ function ReservationSuccessDialog({ open, reservationId, onContinue }) {
         </Stack>
       </DialogTitle>
       <DialogContent>
-        <DialogContentText>Tu reserva fue creada con éxito. Guarda este código para consultarla:</DialogContentText>
+        <DialogContentText id="reservation-success-description">Tu reserva fue creada con éxito. Guarda este código para consultarla:</DialogContentText>
         <Typography variant="h4" component="p" align="center" sx={{ my: 3, fontWeight: 700, letterSpacing: 2 }}>
           <span aria-label={`Código de reserva ${reservationId}`}>{reservationId}</span>
         </Typography>
