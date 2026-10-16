@@ -7,9 +7,9 @@ import EventAvailableIcon from '@mui/icons-material/EventAvailable'
 import PageContainer from '../components/layout/PageContainer.jsx'
 import EmptyState from '../components/common/EmptyState.jsx'
 import ErrorAlert from '../components/common/ErrorAlert.jsx'
-import LoadingState from '../components/common/LoadingState.jsx'
 import ResultsToolbar from '../components/search/ResultsToolbar.jsx'
 import RoomResultCard from '../components/search/RoomResultCard.jsx'
+import RoomResultSkeleton from '../components/search/RoomResultSkeleton.jsx'
 import SearchFilters from '../components/search/SearchFilters.jsx'
 import SearchForm from '../components/search/SearchForm.jsx'
 import StaySeasonPanel from '../components/search/StaySeasonPanel.jsx'
@@ -81,7 +81,13 @@ function SearchPage() {
       />
     )
   } else if (loading) {
-    content = <LoadingState message="Consultando disponibilidad..." />
+    content = (
+      <Stack spacing={2.5} role="status" aria-live="polite" aria-label="Consultando disponibilidad">
+        {[0, 1, 2].map((index) => (
+          <RoomResultSkeleton key={index} />
+        ))}
+      </Stack>
+    )
   } else if (error) {
     content = (
       <ErrorAlert
