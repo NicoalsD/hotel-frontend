@@ -30,7 +30,7 @@ function GuestInfoCard({ guest }) {
     <Card variant="outlined" component="section" aria-labelledby="datos-huesped">
       <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
         <Stack spacing={1.5}>
-          <Typography id="datos-huesped" variant="h5" component="h2">
+          <Typography id="datos-huesped" variant="h4" component="h2">
             Datos del huésped
           </Typography>
           {guest ? (
