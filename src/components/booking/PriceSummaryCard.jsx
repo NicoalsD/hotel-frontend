@@ -11,26 +11,8 @@ import RoomImageCatalog from '../../utils/RoomImageCatalog.js'
 import ErrorAlert from '../common/ErrorAlert.jsx'
 import MoneyText from '../common/MoneyText.jsx'
 import NightlyRateRow from './NightlyRateRow.jsx'
+import SummaryRow from './SummaryRow.jsx'
 import { tokens } from '../../theme/theme.js'
-
-/**
- * Fila etiqueta-valor del resumen (entrada, salida).
- * @param {Object} props
- * @param {string} props.label Etiqueta de la fila.
- * @param {string} props.value Valor a mostrar.
- */
-function SummaryRow({ label, value }) {
-  return (
-    <Stack direction="row" spacing={2} sx={{ justifyContent: 'space-between' }}>
-      <Typography variant="body2" color="text.secondary">
-        {label}
-      </Typography>
-      <Typography variant="body2" sx={{ fontWeight: 600, textAlign: 'right' }}>
-        {value}
-      </Typography>
-    </Stack>
-  )
-}
 
 /**
  * Resumen de la reserva: fotografía de la habitación, fechas y precio.
