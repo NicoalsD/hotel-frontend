@@ -43,3 +43,11 @@ Más detalle en [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md) y [docs/COMPONENTES
 | `npm run build` | Construye la aplicación en `dist/` |
 | `npm run preview` | Sirve la construcción para revisión local |
 | `npm run lint` | Ejecuta oxlint sobre el código |
+
+## Variables de entorno
+
+Copie `.env.example` a `.env.local` y defina:
+
+| Variable | Descripción |
+| --- | --- |
+| `VITE_API_BASE_URL` | URL base del backend. Vacía en desarrollo, donde Vite redirige `/api` a `localhost:8080`. |
