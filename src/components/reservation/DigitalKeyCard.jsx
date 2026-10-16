@@ -35,7 +35,7 @@ function DigitalKeyCard({ digitalKey }) {
       <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
         <Stack spacing={2}>
           <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={1}>
-            <Typography id="llave-digital" variant="h5" component="h2" sx={{ color: tokens.white }}>
+            <Typography id="llave-digital" variant="h4" component="h2" sx={{ color: tokens.white }}>
               Llave digital
             </Typography>
             {digitalKey && (
