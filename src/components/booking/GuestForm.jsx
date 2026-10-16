@@ -23,7 +23,7 @@ const FIELDS = [
  */
 function GuestForm({ values, errors, onChange, onSubmit, disabled = false }) {
   return (
-    <Box component="form" noValidate onSubmit={onSubmit} aria-label="Datos del huésped">
+    <Box component="form" noValidate onSubmit={onSubmit} aria-label="Formulario de datos del huésped">
       <Stack spacing={3}>
         <Typography variant="h6" component="h2">
           Datos del huésped
@@ -49,7 +49,7 @@ function GuestForm({ values, errors, onChange, onSubmit, disabled = false }) {
           ))}
         </Grid>
         <Stack direction="row" justifyContent="flex-end">
-          <Button type="submit" variant="contained" size="large" disabled={disabled}>
+          <Button type="submit" variant="contained" size="large" disabled={disabled} aria-label="Confirmar reserva con los datos del huésped">
             Confirmar reserva
           </Button>
         </Stack>
