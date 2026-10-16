@@ -1,6 +1,7 @@
 import PriceQuote from '../models/PriceQuote.js'
-import RoomAvailability from '../models/RoomAvailability.js'
+import Reservation from '../models/Reservation.js'
 import Room from '../models/Room.js'
+import RoomAvailability from '../models/RoomAvailability.js'
 import HttpClient from './HttpClient.js'
 
 const BASE_PATH = '/api/hotel'
@@ -51,6 +52,42 @@ class HotelApiService {
   async listRooms() {
     const json = await this.httpClient.get(`${BASE_PATH}/habitaciones`)
     return json.map((item) => Room.fromJson(item))
+  }
+}
+
+  /**
+   * Crea una reserva para una habitación y un huésped.
+   * @param {{roomId: number, checkIn: string, checkOut: string, guest: import('../models/Guest.js').default|Object}} request
+   * @returns {Promise<Reservation>}
+   */
+  async createReservation(request) {
+    const guest = request.guest?.toJson ? request.guest.toJson() : request.guest
+    const json = await this.httpClient.post(`${BASE_PATH}/reservar`, {
+      roomId: request.roomId,
+      checkIn: request.checkIn,
+      checkOut: request.checkOut,
+      guest,
+    })
+    return Reservation.fromJson(json)
+  }
+
+  /**
+   * Obtiene una reserva por su código.
+   * @param {string} reservationId Código de reserva (RES-n).
+   * @returns {Promise<Reservation>}
+   */
+  async getReservation(reservationId) {
+    const json = await this.httpClient.get(`${BASE_PATH}/reserva/${encodeURIComponent(reservationId)}`)
+    return Reservation.fromJson(json)
+  }
+
+  /**
+   * Lista todas las reservas, de la más reciente a la más antigua.
+   * @returns {Promise<Reservation[]>}
+   */
+  async listReservations() {
+    const json = await this.httpClient.get(`${BASE_PATH}/reservas`)
+    return json.map((item) => Reservation.fromJson(item))
   }
 }
 
