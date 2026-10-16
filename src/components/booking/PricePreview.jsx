@@ -42,10 +42,26 @@ function PricePreview({ quote, loading, error, onRetry }) {
       <Stack direction="row" spacing={1} useFlexGap sx={{ flexWrap: 'wrap', mb: 2 }}>
         <Chip size="small" label={`${quote.nights} ${quote.nights === 1 ? 'noche' : 'noches'}`} />
         {quote.hasHighSeason && (
-          <Chip size="small" color="warning" variant="outlined" label={`${quote.highSeasonNights} noches de temporada alta`} />
+          <Tooltip title="Temporada alta: las noches de alta demanda tienen una tarifa mayor." arrow>
+            <Chip
+              size="small"
+              color="warning"
+              variant="outlined"
+              tabIndex={0}
+              label={`${quote.highSeasonNights} noches de temporada alta`}
+            />
+          </Tooltip>
         )}
         {quote.hasLowSeason && (
-          <Chip size="small" color="success" variant="outlined" label={`${quote.lowSeasonNights} noches de temporada baja`} />
+          <Tooltip title="Temporada baja: las noches de menor demanda tienen una tarifa reducida." arrow>
+            <Chip
+              size="small"
+              color="success"
+              variant="outlined"
+              tabIndex={0}
+              label={`${quote.lowSeasonNights} noches de temporada baja`}
+            />
+          </Tooltip>
         )}
       </Stack>
       <NightlyRatesTable rates={quote.nightlyRates} />
