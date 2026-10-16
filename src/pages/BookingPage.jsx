@@ -5,6 +5,7 @@ import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
+import Alert from '@mui/material/Alert'
 import useAsync from '../hooks/useAsync.js'
 import { hotelApiService } from '../api/hotelApiInstance.js'
 import PageContainer from '../components/layout/PageContainer.jsx'
@@ -14,6 +15,7 @@ import EmptyState from '../components/common/EmptyState.jsx'
 import BookingStepper from '../components/booking/BookingStepper.jsx'
 import SelectedRoomCard from '../components/booking/SelectedRoomCard.jsx'
 import StayDateValidator from '../utils/StayDateValidator.js'
+import PricePreview from '../components/booking/PricePreview.jsx'
 
 /**
  * Página de reserva para una habitación: resumen, fechas, precio, datos del huésped y confirmación.
@@ -29,6 +31,13 @@ function BookingPage() {
   const room = useMemo(
     () => (rooms.data ?? []).find((item) => String(item.id) === String(roomId)) ?? null,
     [rooms.data, roomId],
+  )
+
+  const roomType = room?.type ?? ''
+  const datesValid = StayDateValidator.isValid(checkIn, checkOut)
+  const quote = useAsync(
+    () => (roomType && datesValid ? hotelApiService.getPriceQuote(roomType, checkIn, checkOut) : null),
+    [roomType, checkIn, checkOut],
   )
 
   /**
@@ -102,6 +111,16 @@ function BookingPage() {
             </Grid>
           </Grid>
         </Paper>
+        {datesValid ? (
+          <PricePreview
+            quote={quote.data}
+            loading={quote.loading}
+            error={quote.error}
+            onRetry={() => quote.execute().catch(() => {})}
+          />
+        ) : (
+          <Alert severity="info">Selecciona fechas válidas para ver el precio de la estadía.</Alert>
+        )}
       </Stack>
     </PageContainer>
   )
