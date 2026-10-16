@@ -14,7 +14,7 @@ function AvailabilitySummary({ checkIn, checkOut, rooms }) {
   const availableCount = rooms.filter((room) => room.available).length
 
   return (
-    <Stack spacing={0.5}>
+    <Stack spacing={0.5} role="status" aria-live="polite">
       <Typography variant="h6" component="h2">
         {DateFormatter.format(checkIn)} - {DateFormatter.format(checkOut)}
       </Typography>
