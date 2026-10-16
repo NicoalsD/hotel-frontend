@@ -12,7 +12,7 @@ function AvailabilityLegend() {
       <Typography variant="body2" color="text.secondary">
         Puedes reservarla con el botón Seleccionar.
       </Typography>
-      <Chip size="small" label="No disponible" />
+      <Chip size="small" label="No disponible" variant="outlined" />
       <Typography variant="body2" color="text.secondary">
         Ya tiene una reserva en las fechas elegidas.
       </Typography>
