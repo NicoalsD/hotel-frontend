@@ -87,8 +87,8 @@ function ReservationList({ reservations }) {
                 <TableCell>Huésped</TableCell>
                 <TableCell sx={DESKTOP_ONLY}>Habitación</TableCell>
                 <TableCell sx={DESKTOP_ONLY}>Fechas</TableCell>
-                <TableCell>Estado</TableCell>
                 <TableCell align="right">Total</TableCell>
+                <TableCell>Estado</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -113,11 +113,11 @@ function ReservationList({ reservations }) {
                       : 'Sin asignar'}
                   </TableCell>
                   <TableCell sx={DESKTOP_ONLY}>{stayDates(reservation)}</TableCell>
-                  <TableCell>
-                    <StatusChip status={reservation.status} />
-                  </TableCell>
                   <TableCell align="right">
                     <MoneyText value={reservation.estimatedTotal} sx={{ fontWeight: 800, color: 'text.primary' }} />
+                  </TableCell>
+                  <TableCell>
+                    <StatusChip status={reservation.status} />
                   </TableCell>
                 </TableRow>
               ))}
