@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import dayjs from 'dayjs'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import Stack from '@mui/material/Stack'
@@ -42,6 +43,20 @@ function SearchForm({ initialValues, onSubmit }) {
     setErrors((previous) => ({ ...previous, [field]: undefined }))
   }
 
+  const handleCheckInChange = (event) => {
+    const checkIn = event.target.value
+    setValues((previous) => {
+      const shouldMoveCheckOut =
+        checkIn && previous.checkOut && DateFormatter.nightsBetween(checkIn, previous.checkOut) <= 0
+      return {
+        ...previous,
+        checkIn,
+        checkOut: shouldMoveCheckOut ? dayjs(checkIn).add(1, 'day').format('YYYY-MM-DD') : previous.checkOut,
+      }
+    })
+    setErrors((previous) => ({ ...previous, checkIn: undefined, checkOut: undefined }))
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
     const nextErrors = validateDates(values)
@@ -61,7 +76,7 @@ function SearchForm({ initialValues, onSubmit }) {
             type="date"
             label="Fecha de entrada"
             value={values.checkIn}
-            onChange={handleChange('checkIn')}
+            onChange={handleCheckInChange}
             error={Boolean(errors.checkIn)}
             helperText={errors.checkIn}
             slotProps={{ inputLabel: { shrink: true } }}
