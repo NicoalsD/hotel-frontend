@@ -30,7 +30,7 @@ function StaySeasonPanel({ checkIn, checkOut }) {
   const hasStay = DateFormatter.nightsBetween(checkIn, checkOut) > 0
 
   return (
-    <Paper variant="outlined" component="section" aria-labelledby="stay-season-title" sx={{ p: 2.5 }}>
+    <Paper variant="outlined" component="section" aria-labelledby="stay-season-title" sx={{ p: 2 }}>
       <Stack spacing={1.5}>
         <Typography id="stay-season-title" variant="h5" component="h2">
           Temporadas del año

@@ -166,7 +166,7 @@ function SearchPage() {
     >
       {hasValidRange ? (
         <Stack direction={{ xs: 'column', md: 'row' }} spacing={3} sx={{ alignItems: 'flex-start' }}>
-          <Stack spacing={2.5} sx={{ width: { xs: '100%', md: 280 }, flexShrink: 0 }}>
+          <Stack spacing={2.5} sx={{ width: { xs: '100%', md: 300 }, flexShrink: 0 }}>
             <SearchFilters
               roomType={roomType}
               onRoomTypeChange={handleRoomTypeChange}
