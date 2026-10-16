@@ -39,3 +39,19 @@ Catálogo de los componentes de `src/components/`. Cada carpeta agrupa un flujo 
 - **InvoiceHeader**: encabezado con los datos de la factura, mediante el componente interno `Field` (par etiqueta-valor).
 - **InvoiceLinesTable**: líneas de la factura: estadía por temporada y servicios adicionales.
 - **InvoiceTotals**: filas de totales con etiqueta a la izquierda y monto a la derecha.
+
+## Comunes y diseño (`components/common/` y `components/layout/`)
+
+### Comunes
+
+- **EmptyState**: estado vacío con título, descripción, icono y acciones opcionales.
+- **ErrorAlert**: mensaje de error con acción opcional para reintentar.
+- **LoadingState**: indicador de carga centrado con mensaje accesible.
+- **MoneyText**: texto con un monto en dólares; acepta las props de `Typography`.
+- **StatusChip**: chip con el estado de una reserva, con etiqueta y color tomados de `StatusPresenter`.
+
+### Layout
+
+- **AppHeader**: encabezado con la marca y la navegación principal.
+- **AppFooter**: pie de página con el nombre del hotel y el año actual.
+- **PageContainer**: estructura base de cada página con título, subtítulo, contenido y pie.
