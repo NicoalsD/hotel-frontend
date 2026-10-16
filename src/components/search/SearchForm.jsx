@@ -69,6 +69,12 @@ function SearchForm({ initialValues, onSubmit, submitLabel = 'Buscar' }) {
 
   const fieldSx = {
     flex: { md: 1 },
+    '& .MuiFilledInput-root': {
+      bgcolor: tokens.white,
+      borderRadius: '6px',
+      minHeight: 56,
+      '&:hover, &.Mui-focused': { bgcolor: tokens.white },
+    },
     '& .MuiFormHelperText-root': { color: tokens.ink, fontWeight: 600, mx: 0.5 },
     '& .MuiInputLabel-root.Mui-error': { color: tokens.danger },
   }
@@ -92,28 +98,31 @@ function SearchForm({ initialValues, onSubmit, submitLabel = 'Buscar' }) {
     >
       <TextField
         required
+        variant="filled"
         type="date"
         label="Fecha de entrada"
         value={values.checkIn}
         onChange={handleCheckInChange}
         error={Boolean(errors.checkIn)}
         helperText={errors.checkIn}
-        slotProps={{ inputLabel: { shrink: true }, htmlInput: { min: DateFormatter.today() } }}
+        slotProps={{ inputLabel: { shrink: true }, input: { disableUnderline: true }, htmlInput: { min: DateFormatter.today() } }}
         sx={fieldSx}
       />
       <TextField
         required
+        variant="filled"
         type="date"
         label="Fecha de salida"
         value={values.checkOut}
         onChange={handleChange('checkOut')}
         error={Boolean(errors.checkOut)}
         helperText={errors.checkOut}
-        slotProps={{ inputLabel: { shrink: true }, htmlInput: { min: values.checkIn || DateFormatter.today() } }}
+        slotProps={{ inputLabel: { shrink: true }, input: { disableUnderline: true }, htmlInput: { min: values.checkIn || DateFormatter.today() } }}
         sx={fieldSx}
       />
       <Box sx={fieldSx}>
         <RoomTypeFilter
+          variant="filled"
           value={values.roomType}
           onChange={(roomType) => setValues((previous) => ({ ...previous, roomType }))}
         />
