@@ -34,3 +34,12 @@ docs/          Documentación de arquitectura, componentes, API y despliegue
 ```
 
 Más detalle en [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md) y [docs/COMPONENTES.md](docs/COMPONENTES.md).
+
+## Scripts
+
+| Comando | Descripción |
+| --- | --- |
+| `npm run dev` | Servidor de desarrollo en `http://localhost:5173` |
+| `npm run build` | Construye la aplicación en `dist/` |
+| `npm run preview` | Sirve la construcción para revisión local |
+| `npm run lint` | Ejecuta oxlint sobre el código |
