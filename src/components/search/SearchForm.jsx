@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import dayjs from 'dayjs'
 import Button from '@mui/material/Button'
-import Grid from '@mui/material/Grid'
-import Stack from '@mui/material/Stack'
+import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import SearchIcon from '@mui/icons-material/Search'
 import RoomTypeFilter from './RoomTypeFilter.jsx'
 import DateFormatter from '../../utils/DateFormatter.js'
+import { tokens } from '../../theme/theme.js'
 
 /**
  * Valida las fechas de búsqueda y devuelve los mensajes de error en español.
@@ -33,8 +33,9 @@ function validateDates({ checkIn, checkOut }) {
  * @param {Object} props
  * @param {{checkIn: string, checkOut: string, roomType: string}} props.initialValues Valores iniciales.
  * @param {(values: {checkIn: string, checkOut: string, roomType: string}) => void} props.onSubmit Se invoca con valores válidos.
+ * @param {string} [props.submitLabel] Texto del botón de búsqueda.
  */
-function SearchForm({ initialValues, onSubmit }) {
+function SearchForm({ initialValues, onSubmit, submitLabel = 'Buscar' }) {
   const [values, setValues] = useState(initialValues)
   const [errors, setErrors] = useState({})
 
@@ -66,45 +67,67 @@ function SearchForm({ initialValues, onSubmit }) {
     }
   }
 
+  const fieldSx = {
+    flex: { md: 1 },
+    '& .MuiFormHelperText-root': { color: tokens.ink, fontWeight: 600, mx: 0.5 },
+    '& .MuiInputLabel-root.Mui-error': { color: tokens.danger },
+  }
+
   return (
-    <Stack component="form" onSubmit={handleSubmit} noValidate spacing={2} aria-label="Buscar disponibilidad">
-      <Grid container spacing={2}>
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <TextField
-            fullWidth
-            required
-            type="date"
-            label="Fecha de entrada"
-            value={values.checkIn}
-            onChange={handleCheckInChange}
-            error={Boolean(errors.checkIn)}
-            helperText={errors.checkIn}
-            slotProps={{ inputLabel: { shrink: true } }}
-          />
-        </Grid>
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <TextField
-            fullWidth
-            required
-            type="date"
-            label="Fecha de salida"
-            value={values.checkOut}
-            onChange={handleChange('checkOut')}
-            error={Boolean(errors.checkOut)}
-            helperText={errors.checkOut}
-            slotProps={{ inputLabel: { shrink: true } }}
-          />
-        </Grid>
-        <Grid size={{ xs: 12, md: 3 }}>
-          <RoomTypeFilter value={values.roomType} onChange={(roomType) => setValues((previous) => ({ ...previous, roomType }))} />
-        </Grid>
-        <Grid size={{ xs: 12, md: 3 }}>
-          <Button type="submit" fullWidth variant="contained" size="large" startIcon={<SearchIcon />} sx={{ height: '100%' }}>
-            Buscar
-          </Button>
-        </Grid>
-      </Grid>
-    </Stack>
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      noValidate
+      aria-label="Buscar disponibilidad"
+      sx={{
+        bgcolor: tokens.amber,
+        p: '4px',
+        borderRadius: '10px',
+        boxShadow: tokens.shadowRaised,
+        display: 'flex',
+        flexDirection: { xs: 'column', md: 'row' },
+        alignItems: { md: 'flex-start' },
+        gap: '4px',
+      }}
+    >
+      <TextField
+        required
+        type="date"
+        label="Fecha de entrada"
+        value={values.checkIn}
+        onChange={handleCheckInChange}
+        error={Boolean(errors.checkIn)}
+        helperText={errors.checkIn}
+        slotProps={{ inputLabel: { shrink: true }, htmlInput: { min: DateFormatter.today() } }}
+        sx={fieldSx}
+      />
+      <TextField
+        required
+        type="date"
+        label="Fecha de salida"
+        value={values.checkOut}
+        onChange={handleChange('checkOut')}
+        error={Boolean(errors.checkOut)}
+        helperText={errors.checkOut}
+        slotProps={{ inputLabel: { shrink: true }, htmlInput: { min: values.checkIn || DateFormatter.today() } }}
+        sx={fieldSx}
+      />
+      <Box sx={fieldSx}>
+        <RoomTypeFilter
+          value={values.roomType}
+          onChange={(roomType) => setValues((previous) => ({ ...previous, roomType }))}
+        />
+      </Box>
+      <Button
+        type="submit"
+        variant="contained"
+        size="large"
+        startIcon={<SearchIcon />}
+        sx={{ minHeight: 56, px: 4, flexShrink: 0 }}
+      >
+        {submitLabel}
+      </Button>
+    </Box>
   )
 }
 
