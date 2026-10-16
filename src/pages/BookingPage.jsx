@@ -12,7 +12,6 @@ import PageContainer from '../components/layout/PageContainer.jsx'
 import LoadingState from '../components/common/LoadingState.jsx'
 import ErrorAlert from '../components/common/ErrorAlert.jsx'
 import EmptyState from '../components/common/EmptyState.jsx'
-import BookingStepper from '../components/booking/BookingStepper.jsx'
 import SelectedRoomCard from '../components/booking/SelectedRoomCard.jsx'
 import StayDateValidator from '../utils/StayDateValidator.js'
 import PricePreview from '../components/booking/PricePreview.jsx'
@@ -132,7 +131,6 @@ function BookingPage() {
   return (
     <PageContainer title="Reservar habitación" subtitle="Completa los datos para confirmar tu estadía.">
       <Stack spacing={3}>
-        <BookingStepper activeStep={createdReservation ? 2 : 1} />
         <SelectedRoomCard room={room} />
         <Paper variant="outlined" sx={{ p: 3 }}>
           <Typography variant="h6" component="h2" gutterBottom>
