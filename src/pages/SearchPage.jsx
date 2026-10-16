@@ -17,6 +17,12 @@ import { hotelApiService } from '../api/hotelApiInstance.js'
 import useAsync from '../hooks/useAsync.js'
 import DateFormatter from '../utils/DateFormatter.js'
 
+const ROOM_SORTERS = {
+  'price-asc': (a, b) => a.estimatedTotal - b.estimatedTotal,
+  'price-desc': (a, b) => b.estimatedTotal - a.estimatedTotal,
+  number: (a, b) => String(a.number).localeCompare(String(b.number), 'es', { numeric: true }),
+}
+
 /**
  * Página de búsqueda de disponibilidad. El rango de fechas y el tipo viven en la URL.
  */
@@ -35,6 +41,10 @@ function SearchPage() {
     () => (hasValidRange ? hotelApiService.searchAvailability(checkIn, checkOut, roomType || undefined) : Promise.resolve(null)),
     [checkIn, checkOut, roomType, hasValidRange],
   )
+
+  const visibleRooms = (rooms ?? [])
+    .filter((room) => !availableOnly || room.available)
+    .sort(ROOM_SORTERS[sortBy] ?? ROOM_SORTERS.number)
 
   const handleSearch = (values) => {
     const params = { checkIn: values.checkIn, checkOut: values.checkOut }
@@ -93,10 +103,10 @@ function SearchPage() {
         <ResultsToolbar
           availableCount={rooms.filter((room) => room.available).length}
           totalCount={rooms.length}
-          visibleCount={rooms.length}
+          visibleCount={visibleRooms.length}
         />
         <Stack component="ul" aria-label="Habitaciones" spacing={2.5} sx={{ listStyle: 'none', p: 0, m: 0 }}>
-          {rooms.map((room) => (
+          {visibleRooms.map((room) => (
             <Box component="li" key={room.roomId}>
               <RoomResultCard room={room} onSelect={handleSelect} />
             </Box>
