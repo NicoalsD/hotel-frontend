@@ -9,6 +9,7 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
+import Typography from '@mui/material/Typography'
 import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 import EmptyState from '../common/EmptyState.jsx'
@@ -54,6 +55,9 @@ function ReservationList({ reservations }) {
           </ToggleButton>
         ))}
       </ToggleButtonGroup>
+      <Typography variant="body2" color="text.secondary" aria-live="polite">
+        Mostrando {visibleReservations.length} de {reservations.length} reservas
+      </Typography>
       {visibleReservations.length === 0 ? (
         <EmptyState
           title="No hay reservas con este estado"
